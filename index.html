@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -887,12 +887,15 @@ const ROSTER = {"22mbv5sj2yr": 4, "2fjefcf1eb0": 5, "12efzlhqafv": 6, "r178psens
 function cyrb53(str,seed=0){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0);}
 function normSid(v){ /* полноширинные цифры → обычные, всё лишнее убрать */
   return String(v).replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/\D/g,''); }
-function rowOf(sid){ return ROSTER[cyrb53('cl242e|'+sid).toString(36)] || null; }
+/* тестовый 學號 преподавателя: строка «000», отправлять можно сколько угодно раз */
+const TEST_SID = '25700';
+const isTest = sid => sid===TEST_SID;
+function rowOf(sid){ return isTest(sid) ? '000' : (ROSTER[cyrb53('cl242e|'+sid).toString(36)] || null); }
 
 /* ---------- защита от повторной отправки (отдельный ключ, не стирается при новой попытке) ---------- */
 function sentKey(sid){ return 'hw_sent_'+CFG.lessonKey+'_'+sid; }
-function wasSent(sid){ try{ return !!localStorage.getItem(sentKey(sid)); }catch(e){ return false; } }
-function markSent(sid){ try{ localStorage.setItem(sentKey(sid), new Date().toISOString()); }catch(e){} }
+function wasSent(sid){ if(isTest(sid)) return false; try{ return !!localStorage.getItem(sentKey(sid)); }catch(e){ return false; } }
+function markSent(sid){ if(isTest(sid)) return; try{ localStorage.setItem(sentKey(sid), new Date().toISOString()); }catch(e){} }
 let sending = false;
 /* номер попытки (на этом устройстве) — пишется в отчёт */
 function nextAttempt(sid){
@@ -1332,6 +1335,10 @@ function showDecision(){
               'Em hài lòng với điểm này chưa? Nếu rồi thì gửi cho thầy — <b>chỉ được gửi một lần</b>. Muốn điểm cao hơn thì làm lại từ đầu (kết quả lần này sẽ không được gửi).'), 'decide');
 }
 function showSent(){
+  if(isTest(st.student.sid)){
+    setStatus('✅ ТЕСТ: письмо отправлено на '+esc(st.student.mail)+'. Для тестового 學號 '+TEST_SID+
+              ' отправлять можно сколько угодно раз — нажми «Ещё раз» и пройди заново.', 'again'); return;
+  }
   setStatus('✅ '+T('Результат отправлен на '+esc(st.student.mail)+' и преподавателю. Дальше можно тренироваться — результаты больше не отправляются.',
               'Your result has been sent to you and the teacher. You can keep practising; results will not be sent again.',
               '成績已寄給你和老師（如果沒看到，請檢查垃圾郵件）。之後還可以繼續練習，但成績不會再寄出。',
@@ -1375,7 +1382,7 @@ function restartHW(){
 function reportText(){
   const {ans, ok, score, secs, mins} = stats();
   const L=[];
-  L.push(CFG.lesson+' — домашнее задание');
+  L.push(CFG.lesson+' — домашнее задание'+(isTest(st.student.sid)?'   [ТЕСТ преподавателя]':''));
   L.push('中文姓名: '+st.student.zh);
   L.push('Русское имя: '+st.student.ru);
   L.push('學號: '+st.student.sid);
