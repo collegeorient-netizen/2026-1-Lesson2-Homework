@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>ДЗ · Урок 2 · Как дела? · 俄語第二課作業</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rubik:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rubik:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#1E2A44;
@@ -55,7 +55,7 @@ h1,h2,.disp{font-family:'Russo One','Noto Sans TC',sans-serif;font-weight:400}
   content:"2";position:absolute;right:-6px;bottom:-40px;
   font-family:'Russo One';font-size:140px;color:rgba(198,56,47,.08);
 }
-.hero .zh{font-size:.85rem;color:#9A8B6B;margin-bottom:6px;line-height:1.5}
+.hero .sub2{font-size:.85rem;color:#9A8B6B;margin-bottom:6px;line-height:1.5}
 .hero .phrase{font-family:'Russo One';font-size:1.45rem;line-height:1.4}
 .hero .listen{
   margin-top:14px;border:none;background:var(--red);color:#fff;
@@ -291,15 +291,31 @@ h1,h2,.disp{font-family:'Russo One','Noto Sans TC',sans-serif;font-weight:400}
 #dlist li.n{color:var(--red)}
 .slot.okslot{border-color:var(--green);background:#E6F4EC}
 .slot.noslot{border-color:var(--red);background:#FBEAE8}
+/* ---------- третий язык: 中文 / 日本語 / Tiếng Việt ---------- */
+.ja{font-family:'Noto Sans JP','Hiragino Sans','Yu Gothic','Meiryo',sans-serif}
+.vi{font-family:system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+.instr .ja,.instr .vi,.explain .ja,.explain .vi,.status .ja,.status .vi{display:block;color:#41506B}
+.hintline .ja,.hintline .vi{display:block}
+body.lg-zh .ja, body.lg-zh .vi, body.lg-ja .zh, body.lg-ja .vi, body.lg-vi .zh, body.lg-vi .ja{display:none !important}
+.lgsw{display:flex;gap:6px;justify-content:flex-end;margin-bottom:8px}
+.lgsw button{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;
+  font-size:.82rem;color:var(--ink);cursor:pointer;font-family:'Rubik','Noto Sans TC','Noto Sans JP',sans-serif}
+.lgsw button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 </style>
 </head>
 <body>
 <div class="app">
 
+  <div class="lgsw" id="lgsw">
+    <button data-lg="zh" onclick="setLang('zh')">中文</button>
+    <button data-lg="ja" onclick="setLang('ja')">日本語</button>
+    <button data-lg="vi" onclick="setLang('vi')">Tiếng Việt</button>
+  </div>
+
   <div class="top">
     <div class="titlebox">
       <h1>ДЗ · Урок 2 · Как дела?</h1>
-      <div class="sub">第二課作業 · Homework, Lesson 2</div>
+      <div class="sub"><span class="zh">第二課作業</span><span class="ja">第2課の宿題</span><span class="vi">Bài tập về nhà – Bài 2</span> · Homework, Lesson 2</div>
     </div>
     <div class="stars" id="topProg"></div>
   </div>
@@ -308,44 +324,48 @@ h1,h2,.disp{font-family:'Russo One','Noto Sans TC',sans-serif;font-weight:400}
   <section class="screen active" id="scr-intro">
     <div class="hero">
       <div class="phrase">Дома́шнее зада́ние</div>
-      <div class="zh" style="margin-top:6px">
+      <div class="sub2" style="margin-top:6px">
         50 заданий · 100 баллов · ≈ 40–60 минут<br>
         50 tasks · 100 points · about 40–60 minutes<br>
-        50 題 · 100 分 · 約 40–60 分鐘
+        <span class="zh">50 題 · 100 分 · 約 40–60 分鐘</span><span class="ja">50問 · 100点 · 約40〜60分</span><span class="vi">50 câu · 100 điểm · khoảng 40–60 phút</span>
       </div>
     </div>
 
     <div class="instr">
-      Слушать можно сколько угодно раз. Засчитывается <b>первый</b> ответ. Прогресс сохраняется: можно закрыть страницу и продолжить позже на этом же устройстве.
-      <span class="en">You may replay the audio as many times as you like. Only your <b>first</b> answer counts. Progress is saved: you can close the page and continue later on the same device.</span>
+      Слушать можно сколько угодно раз. В каждом задании засчитывается <b>первый</b> ответ. Прогресс сохраняется: можно закрыть страницу и продолжить позже на этом же устройстве.
+      <span class="en">You may replay the audio as many times as you like. In each task only your <b>first</b> answer counts. Progress is saved: you can close the page and continue later on the same device.</span>
       <span class="zh">音檔可以重複聽，不限次數。每題只算<b>第一次</b>的答案。進度會自動儲存：可以關掉網頁，之後在同一台裝置上繼續。</span>
+      <span class="ja">音声は何回でも聞けます。各問題は<b>最初</b>の答えだけが採点されます。進み具合は自動で保存されるので、ページを閉じても同じ端末で続きができます。</span>
+      <span class="vi">Có thể nghe lại bao nhiêu lần cũng được. Mỗi câu chỉ tính câu trả lời <b>đầu tiên</b>. Tiến độ được lưu tự động: có thể đóng trang và làm tiếp sau trên cùng thiết bị.</span>
     </div>
 
     <div class="sound" id="soundPanel">
       <div class="hdr" onclick="document.getElementById('soundPanel').classList.toggle('open')">
         <span>🔈 Настройка звука · Sound</span>
-        <span class="zh">語音設定 ▾</span>
+        <span class="zh">語音設定 ▾</span><span class="ja">音声の設定 ▾</span><span class="vi">Cài đặt âm thanh ▾</span>
       </div>
       <div class="body">
-        <label>Русский голос · Russian voice · 俄語發音人</label>
+        <label>Русский голос · Russian voice · <span class="zh">俄語發音人</span><span class="ja">ロシア語の音声</span><span class="vi">Giọng đọc tiếng Nga</span></label>
         <select id="voiceSel" onchange="setVoice(this.value)"></select>
-        <label>Скорость речи · Speed · 語速</label>
+        <label>Скорость речи · Speed · <span class="zh">語速</span><span class="ja">話す速さ</span><span class="vi">Tốc độ đọc</span></label>
         <div class="speeds" id="speeds">
-          <button onclick="setRate(0.75,this)">Медленно<br>慢</button>
-          <button class="on" onclick="setRate(0.9,this)">Обычно<br>正常</button>
-          <button onclick="setRate(1.05,this)">Быстро<br>快</button>
+          <button onclick="setRate(0.75,this)">Медленно<br><span class="zh">慢</span><span class="ja">ゆっくり</span><span class="vi">Chậm</span></button>
+          <button class="on" onclick="setRate(0.9,this)">Обычно<br><span class="zh">正常</span><span class="ja">ふつう</span><span class="vi">Bình thường</span></button>
+          <button onclick="setRate(1.05,this)">Быстро<br><span class="zh">快</span><span class="ja">速い</span><span class="vi">Nhanh</span></button>
         </div>
-        <label>Громкость слогов · Syllable volume · 音節音量</label>
+        <label>Громкость слогов · Syllable volume · <span class="zh">音節音量</span><span class="ja">音節の音量</span><span class="vi">Âm lượng âm tiết</span></label>
         <input type="range" id="sylVol" min="0.2" max="1.6" step="0.1" value="1"
                oninput="setSylVol(this.value)" onchange="speakSyl('до')" style="width:100%;margin-bottom:12px">
         <div class="row">
-          <button class="btn ghost sm" onclick="speak('Приве́т! Как дела́?',1)">🔊 Слово · Word · 單字</button>
-          <button class="btn ghost sm" onclick="speakSyl('до')">🔊 Слог · Syllable · 音節</button>
+          <button class="btn ghost sm" onclick="speak('Приве́т! Как дела́?',1)">🔊 Слово · Word · <span class="zh">單字</span><span class="ja">単語</span><span class="vi">Từ</span></button>
+          <button class="btn ghost sm" onclick="speakSyl('до')">🔊 Слог · Syllable · <span class="zh">音節</span><span class="ja">音節</span><span class="vi">Âm tiết</span></button>
         </div>
         <div style="font-size:.75rem;color:var(--muted);line-height:1.5;margin-top:10px">
           Слоги звучат в записи преподавателя. Голос и скорость выше — для слов и фраз.<br>
           Syllables are recorded by your teacher; the voice and speed above apply to words and phrases.<br>
           <span class="zh">音節是老師親自錄的音；上面的發音人和語速只影響單字和句子。</span>
+          <span class="ja">音節は先生の録音です。上の音声と速さの設定は、単語と文だけに使われます。</span>
+          <span class="vi">Âm tiết là bản ghi âm của thầy; giọng đọc và tốc độ ở trên chỉ dùng cho từ và câu.</span>
         </div>
         <div class="warn" id="voiceWarn">
           На этом устройстве нет русского голоса — слова читаются неразборчиво.<br>
@@ -354,28 +374,39 @@ h1,h2,.disp{font-family:'Russo One','Noto Sans TC',sans-serif;font-weight:400}
           iPhone/iPad：設定 → 輔助使用 → 朗讀內容 → 聲音 → 俄文，下載一個聲音。<br>
           Android：設定 → 系統 → 語言與輸入 → 文字轉語音 → 安裝俄文語音資料。<br>
           Windows：設定 → 時間與語言 → 語言 → 新增俄文（含語音）。</span>
+          <span class="ja">この端末にはロシア語の音声がないため、単語や文の発音がはっきり聞こえません。<br>
+          iPhone/iPad：設定 → アクセシビリティ → 読み上げコンテンツ → 声 → ロシア語 で音声をダウンロード。<br>
+          Android：設定 → システム → 言語と入力 → テキスト読み上げ → ロシア語の音声データをインストール。<br>
+          Windows：設定 → 時刻と言語 → 言語 → ロシア語を追加（音声も含む）。</span>
+          <span class="vi">Thiết bị này chưa có giọng đọc tiếng Nga, nên từ và câu sẽ đọc không rõ.<br>
+          iPhone/iPad: Cài đặt → Trợ năng → Nội dung được đọc → Giọng nói → Tiếng Nga, tải một giọng.<br>
+          Android: Cài đặt → Hệ thống → Ngôn ngữ và bàn phím → Chuyển văn bản thành giọng nói → cài dữ liệu giọng tiếng Nga.<br>
+          Windows: Cài đặt → Thời gian và ngôn ngữ → Ngôn ngữ → Thêm tiếng Nga (kèm giọng nói).</span>
         </div>
       </div>
     </div>
 
     <div class="namewrap form">
-      <label>中文姓名 · Имя по-китайски · Chinese name</label>
+      <label>Имя · Name · <span class="zh">中文姓名</span><span class="ja">氏名（漢字・名簿と同じ）</span><span class="vi">Họ tên (chữ Hán, như danh sách lớp)</span></label>
       <input id="fZh" autocomplete="off" placeholder="例：王小明">
-      <label>Русское имя · 俄文名字 · Russian name</label>
+      <label>Русское имя · Russian name · <span class="zh">俄文名字</span><span class="ja">ロシア語の名前</span><span class="vi">Tên tiếng Nga</span></label>
       <input id="fRu" list="ruNames" autocomplete="off" placeholder="напр. Ка́тя">
       <datalist id="ruNames"></datalist>
-      <label>學號 · Номер студента · Student ID</label>
+      <label>學號 · Номер студента · Student ID · <span class="zh">學號</span><span class="ja">学籍番号</span><span class="vi">Mã số sinh viên</span></label>
       <input id="fId" inputmode="numeric" autocomplete="off" placeholder="例：11557245">
       <label>E-mail</label>
       <input id="fMail" type="email" inputmode="email" autocomplete="email" placeholder="11557245@cycu.org.tw">
-      <div class="hintline">Заполнится само после 學號. Результат придёт тебе и преподавателю.
-        <span class="zh">填好學號後會自動帶入。成績會寄給你和老師各一份。</span></div>
+      <div class="hintline">E-mail заполнится сам после 學號. Когда закончишь, увидишь свои баллы и сам(а) решишь: <b>отправить</b> результат преподавателю или <b>пройти задание заново</b>. Отправить можно <b>только один раз</b>.<br>
+        When you finish, you will see your score and choose: <b>send</b> it to the teacher or <b>start again</b>. You can send <b>only once</b>.
+        <span class="zh">填好學號後 e-mail 會自動帶入。做完後會先看到分數，再由你決定：<b>寄給老師</b>，或<b>重新作答</b>。成績<b>只能寄出一次</b>。</span>
+        <span class="ja">學號（学籍番号）を入れるとメールアドレスが自動で入ります。最後まで解くと点数が表示され、<b>先生に送る</b>か<b>もう一度やり直す</b>かを自分で選べます。送信できるのは<b>1回だけ</b>です。</span>
+        <span class="vi">Nhập 學號 thì e-mail sẽ tự điền. Làm xong, em sẽ thấy điểm và tự chọn: <b>gửi cho thầy</b> hoặc <b>làm lại từ đầu</b>. Chỉ được gửi <b>một lần</b>.</span></div>
       <div class="feedback no" id="formErr" style="font-size:.9rem"></div>
       <div class="row">
-        <button class="btn red" id="startBtn" onclick="startHW()">Начать · Start · 開始</button>
+        <button class="btn red" id="startBtn" onclick="startHW()">Начать · Start · <span class="zh">開始</span><span class="ja">スタート</span><span class="vi">Bắt đầu</span></button>
       </div>
       <div class="row" id="resumeRow" style="display:none;margin-top:10px">
-        <button class="btn" onclick="resumeHW()">▶ Продолжить · Continue · 繼續作答 <span id="resumeInfo"></span></button>
+        <button class="btn" onclick="resumeHW()">▶ Продолжить · Continue · <span class="zh">繼續作答</span><span class="ja">続ける</span><span class="vi">Tiếp tục</span> <span id="resumeInfo"></span></button>
       </div>
     </div>
   </section>
@@ -386,7 +417,7 @@ h1,h2,.disp{font-family:'Russo One','Noto Sans TC',sans-serif;font-weight:400}
     <div class="sechead" id="sechead"></div>
     <div class="instr" id="qinstr"></div>
     <div id="qpromptBox"></div>
-    <button class="bigplay" id="qplay" onclick="playCurrent()">🔊 Слушать · Listen · 再聽一次</button>
+    <button class="bigplay" id="qplay" onclick="playCurrent()">🔊 Слушать · Listen · <span class="zh">再聽一次</span><span class="ja">もう一度聞く</span><span class="vi">Nghe lại</span></button>
 
     <div class="opts" id="qopts"></div>
 
@@ -394,14 +425,14 @@ h1,h2,.disp{font-family:'Russo One','Noto Sans TC',sans-serif;font-weight:400}
       <div class="slotline" id="bslots"></div>
       <div class="bank" id="bbank"></div>
       <div class="row">
-        <button class="btn ghost" id="breset" onclick="resetBuild()">↺ Заново · Reset · 重來</button>
-        <button class="btn" id="bcheck" onclick="checkBuild()">Проверить · Check · 檢查</button>
+        <button class="btn ghost" id="breset" onclick="resetBuild()">↺ Заново · Reset · <span class="zh">重來</span><span class="ja">やり直す</span><span class="vi">Làm lại</span></button>
+        <button class="btn" id="bcheck" onclick="checkBuild()">Проверить · Check · <span class="zh">檢查</span><span class="ja">確認</span><span class="vi">Kiểm tra</span></button>
       </div>
     </div>
 
     <div class="feedback" id="qfb"></div>
     <div class="explain" id="qexp"></div>
-    <div class="row"><button class="btn red" id="qnext" onclick="nextTask()">Дальше · Next · 下一題</button></div>
+    <div class="row"><button class="btn red" id="qnext" onclick="nextTask()">Дальше · Next · <span class="zh">下一題</span><span class="ja">次へ</span><span class="vi">Tiếp theo</span></button></div>
   </section>
 
   <!-- ================= ИТОГ ================= -->
@@ -413,18 +444,29 @@ h1,h2,.disp{font-family:'Russo One','Noto Sans TC',sans-serif;font-weight:400}
       <div id="dbreak"></div>
     </div>
     <div class="status" id="sendStatus"></div>
+    <!-- выбор: отправить или пройти заново -->
+    <div class="row" id="decideBtns" style="display:none;margin-bottom:14px">
+      <button class="btn red" onclick="confirmSend()">✉ Отправить · Send · <span class="zh">寄給老師</span><span class="ja">先生に送る</span><span class="vi">Gửi cho thầy</span></button>
+      <button class="btn ghost" onclick="restartHW()">↺ Пройти заново · Start again · <span class="zh">重新作答</span><span class="ja">やり直す</span><span class="vi">Làm lại từ đầu</span></button>
+    </div>
+    <!-- после отправки / в режиме тренировки -->
+    <div class="row" id="againBtns" style="display:none;margin-bottom:14px">
+      <button class="btn ghost" onclick="restartHW()">↻ Тренироваться ещё · Practice again · <span class="zh">再練習一次</span><span class="ja">もう一度練習する</span><span class="vi">Luyện tập thêm</span></button>
+    </div>
+    <!-- если письмо не ушло -->
     <div class="row" id="sendBtns" style="display:none;margin-bottom:14px">
-      <button class="btn" onclick="copyReport()">📋 Копировать · Copy · 複製成績</button>
-      <a class="btn ghost" id="mailtoLink" href="#" style="text-decoration:none">✉ E-mail · 寄給老師</a>
-      <button class="btn ghost" id="resendBtn" onclick="sendResults()">↻ Отправить снова · Resend · 重新寄出</button>
+      <button class="btn" id="resendBtn" onclick="sendResults()">↻ Отправить снова · Resend · <span class="zh">重新寄出</span><span class="ja">もう一度送る</span><span class="vi">Gửi lại</span></button>
+      <button class="btn ghost" onclick="copyReport()">📋 Копировать · Copy · <span class="zh">複製成績</span><span class="ja">コピー</span><span class="vi">Sao chép</span></button>
+      <a class="btn ghost" id="mailtoLink" href="#" style="text-decoration:none">✉ E-mail · <span class="zh">寄給老師</span><span class="ja">先生にメール</span><span class="vi">Gửi thầy qua e-mail</span></a>
     </div>
     <div class="namewrap">
-      <b>Мои ответы · My answers · 我的答案</b>
+      <b>Мои ответы · My answers · <span class="zh">我的答案</span><span class="ja">自分の答え</span><span class="vi">Câu trả lời của em</span></b>
       <div id="dlist"></div>
     </div>
   </section>
 
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
@@ -440,8 +482,29 @@ const SYL_AUDIO = {"L1|день":"data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAA
    ============================================================ */
 const plain = s => (s||'').replace(/\u0301/g,'');
 const acc = s => (s||'').replace(/([аеёиоуыэюяАЕЁИОУЫЭЮЯ])\u0301/g,'<span class="acc">$1</span>');
-/* трёхъязычная подпись: русский / English / 中文 */
-const T = (ru,en,zh) => `${ru}<span class="en">${en}</span><span class="zh">${zh}</span>`;
+/* третий язык интерфейса: 中文 / 日本語 / Tiếng Việt (выбирает студент; RU и EN видны всегда) */
+const L = (zh,ja,vi) => `<span class="zh">${zh}</span><span class="ja">${ja}</span><span class="vi">${vi}</span>`;
+/* подпись: русский / English / + выбранный язык */
+const T = (ru,en,zh,ja,vi) => `${ru}<span class="en">${en}</span>${L(zh,ja,vi)}`;
+let LANG = 'zh';
+/* для alert/confirm (там нет HTML): строка на выбранном языке */
+const P = (zh,ja,vi) => ({zh,ja,vi})[LANG];
+/* перевод слова/фразы: выбранный язык · English */
+const gl = o => `${L(o.zh,o.ja,o.vi)} · ${o.en}`;
+function setLang(lg){
+  LANG = ['zh','ja','vi'].includes(lg) ? lg : 'zh';
+  document.body.classList.remove('lg-zh','lg-ja','lg-vi');
+  document.body.classList.add('lg-'+LANG);
+  document.documentElement.lang = LANG==='zh' ? 'zh-Hant' : LANG;
+  document.querySelectorAll('#lgsw button').forEach(b=>b.classList.toggle('on', b.dataset.lg===LANG));
+  try{ localStorage.setItem('hw_lang', LANG); }catch(e){}
+  try{ renderVoiceUI(); }catch(e){}   /* до инициализации озвучки — просто пропускаем */
+}
+function initLang(){
+  let lg=null; try{ lg=localStorage.getItem('hw_lang'); }catch(e){}
+  if(!lg){ const n=(navigator.language||'').toLowerCase(); lg = n.startsWith('ja')?'ja' : n.startsWith('vi')?'vi' : 'zh'; }
+  setLang(lg);
+}
 
 /* ---------- слоги урока 1 (таблица со слайда) ----------
    soft:1 — первый согласный мягкий (фон подсвечен).
@@ -462,26 +525,26 @@ const SYL1 = [
    syl — деление на слоги для тренировки (открытый слог, как в табл. урока 1:
    до·брый). g — род (только у существительных): m / f / n; pl — мн. число. */
 const WORDS2 = [
- {w:'уро́к',       syl:['у','рок'],          zh:'課',            en:'lesson',            g:'m', grp:'num'},
- {w:'оди́н',       syl:['о','дин'],          zh:'一',            en:'one',               grp:'num'},
- {w:'два',         syl:['два'],              zh:'二',            en:'two',               grp:'num'},
- {w:'три',         syl:['три'],              zh:'三',            en:'three',             grp:'num'},
- {w:'до́брый',     syl:['до','брый'],        zh:'好的、善良的',   en:'good, kind',        grp:'greet'},
- {w:'день',        syl:['день'],             zh:'天、日',         en:'day',               g:'m', grp:'greet'},
- {w:'приве́т',     syl:['при','вет'],        zh:'嗨',            en:'hi',                g:'m', grp:'greet'},
- {w:'приве́тик',   syl:['при','ве','тик'],   zh:'嗨～（小）',     en:'hi there (cute)',   g:'m', grp:'greet'},
- {w:'как',         syl:['как'],              zh:'怎麼、如何',     en:'how',               grp:'q'},
- {w:'де́ло',       syl:['де','ло'],          zh:'事情',          en:'affair, matter',    g:'n', grp:'q'},
- {w:'дела́',       syl:['де','ла'],          zh:'事情們（複數）', en:'affairs (plural)',  pl:1,  grp:'q'},
- {w:'пого́да',     syl:['по','го','да'],     zh:'天氣',          en:'weather',           g:'f', grp:'q'},
- {w:'хорошо́',     syl:['хо','ро','шо'],     zh:'（很）好',       en:'well, good',        grp:'adv'},
- {w:'норма́льно',  syl:['нор','маль','но'],  zh:'還好',          en:'OK, normal',        grp:'adv'},
- {w:'пло́хо',      syl:['пло','хо'],         zh:'不好',          en:'badly, bad',        grp:'adv'},
- {w:'обы́чно',     syl:['о','быч','но'],     zh:'平常、正常',     en:'usually, as usual', grp:'adv'},
- {w:'хоро́шая',    syl:['хо','ро','ша','я'], zh:'好的（陰性）',   en:'good (fem.)',       grp:'adj'},
- {w:'норма́льная', syl:['нор','маль','на','я'],zh:'還好的（陰性）',en:'OK (fem.)',         grp:'adj'},
- {w:'плоха́я',     syl:['пло','ха','я'],     zh:'不好的（陰性）', en:'bad (fem.)',        grp:'adj'},
- {w:'обы́чная',    syl:['о','быч','на','я'], zh:'正常的（陰性）', en:'usual (fem.)',      grp:'adj'}
+ {w:'уро́к',       syl:['у','рок'],          zh:'課',            ja:'課・レッスン',        vi:'bài học',              en:'lesson',            g:'m', grp:'num'},
+ {w:'оди́н',       syl:['о','дин'],          zh:'一',            ja:'1・ひとつ',           vi:'một',                  en:'one',               grp:'num'},
+ {w:'два',         syl:['два'],              zh:'二',            ja:'2・ふたつ',           vi:'hai',                  en:'two',               grp:'num'},
+ {w:'три',         syl:['три'],              zh:'三',            ja:'3・みっつ',           vi:'ba',                   en:'three',             grp:'num'},
+ {w:'до́брый',     syl:['до','брый'],        zh:'好的、善良的',   ja:'良い・やさしい',       vi:'tốt, tử tế',           en:'good, kind',        grp:'greet'},
+ {w:'день',        syl:['день'],             zh:'天、日',         ja:'日・昼',              vi:'ngày',                 en:'day',               g:'m', grp:'greet'},
+ {w:'приве́т',     syl:['при','вет'],        zh:'嗨',            ja:'やあ（くだけた挨拶）', vi:'chào (thân mật)',      en:'hi',                g:'m', grp:'greet'},
+ {w:'приве́тик',   syl:['при','ве','тик'],   zh:'嗨～（小）',     ja:'やっほー（かわいく）', vi:'chào nè (dễ thương)',  en:'hi there (cute)',   g:'m', grp:'greet'},
+ {w:'как',         syl:['как'],              zh:'怎麼、如何',     ja:'どう・どのように',     vi:'thế nào',              en:'how',               grp:'q'},
+ {w:'де́ло',       syl:['де','ло'],          zh:'事情',          ja:'こと・用事',           vi:'việc',                 en:'affair, matter',    g:'n', grp:'q'},
+ {w:'дела́',       syl:['де','ла'],          zh:'事情們（複數）', ja:'こと（複数）',         vi:'các việc (số nhiều)',  en:'affairs (plural)',  pl:1,  grp:'q'},
+ {w:'пого́да',     syl:['по','го','да'],     zh:'天氣',          ja:'天気',                vi:'thời tiết',            en:'weather',           g:'f', grp:'q'},
+ {w:'хорошо́',     syl:['хо','ро','шо'],     zh:'（很）好',       ja:'よく・いい',           vi:'tốt, khỏe',            en:'well, good',        grp:'adv'},
+ {w:'норма́льно',  syl:['нор','маль','но'],  zh:'還好',          ja:'まあまあ',             vi:'bình thường',          en:'OK, normal',        grp:'adv'},
+ {w:'пло́хо',      syl:['пло','хо'],         zh:'不好',          ja:'悪く・よくない',       vi:'tệ, không tốt',        en:'badly, bad',        grp:'adv'},
+ {w:'обы́чно',     syl:['о','быч','но'],     zh:'平常、正常',     ja:'いつもどおり',         vi:'như thường lệ',        en:'usually, as usual', grp:'adv'},
+ {w:'хоро́шая',    syl:['хо','ро','ша','я'], zh:'好的（陰性）',   ja:'いい（女性形）',       vi:'tốt (giống cái)',      en:'good (fem.)',       grp:'adj'},
+ {w:'норма́льная', syl:['нор','маль','на','я'],zh:'還好的（陰性）',ja:'まあまあの（女性形）', vi:'bình thường (giống cái)', en:'OK (fem.)',       grp:'adj'},
+ {w:'плоха́я',     syl:['пло','ха','я'],     zh:'不好的（陰性）', ja:'悪い（女性形）',       vi:'tệ (giống cái)',       en:'bad (fem.)',        grp:'adj'},
+ {w:'обы́чная',    syl:['о','быч','на','я'], zh:'正常的（陰性）', ja:'いつもどおりの（女性形）', vi:'như mọi khi (giống cái)', en:'usual (fem.)', grp:'adj'}
 ];
 /* пары для дистракторов: слушатель должен различить близкие формы */
 const PARTNER = {'хорошо':'хорошая','хорошая':'хорошо','нормально':'нормальная','нормальная':'нормально',
@@ -496,32 +559,32 @@ const SYL2 = [...new Set(WORDS2.flatMap(o=>o.syl))];
 
 /* ---------- фразы урока 2 ---------- */
 const PHRASES2 = [
- {p:'Уро́к оди́н.',     zh:'第一課',              en:'Lesson one.',          grp:'урок'},
- {p:'Уро́к два.',       zh:'第二課',              en:'Lesson two.',          grp:'урок'},
- {p:'Уро́к три.',       zh:'第三課',              en:'Lesson three.',        grp:'урок'},
- {p:'До́брый день!',    zh:'日安！',              en:'Good afternoon!',      grp:'greet'},
- {p:'Приве́т!',         zh:'嗨！',                en:'Hi!',                  grp:'greet'},
- {p:'Приве́тик!',       zh:'嗨～！',              en:'Hi there!',            grp:'greet'},
- {p:'Как дела́?',       zh:'你好嗎？（事情怎麼樣？）', en:'How are you?',     grp:'q'},
- {p:'Как пого́да?',     zh:'天氣怎麼樣？',         en:'How is the weather?',  grp:'q'},
- {p:'Хорошо́!',         zh:'（很）好！',           en:'Good! / Fine!',        grp:'adv'},
- {p:'Норма́льно.',      zh:'還好。',              en:'OK.',                  grp:'adv'},
- {p:'Пло́хо.',          zh:'不好。',              en:'Bad.',                 grp:'adv'},
- {p:'Как обы́чно.',     zh:'跟平常一樣。',         en:'As usual.',            grp:'adv'},
- {p:'Хоро́шая!',        zh:'（天氣）很好！',       en:'Nice! (weather)',      grp:'adj'},
- {p:'Норма́льная.',     zh:'（天氣）還好。',       en:'OK. (weather)',        grp:'adj'},
- {p:'Плоха́я.',         zh:'（天氣）不好。',       en:'Bad. (weather)',       grp:'adj'},
- {p:'Обы́чная.',        zh:'（天氣）正常。',       en:'Usual. (weather)',     grp:'adj'}
+ {p:'Уро́к оди́н.',     zh:'第一課',              ja:'第1課',                 vi:'Bài một.',                    en:'Lesson one.',          grp:'урок'},
+ {p:'Уро́к два.',       zh:'第二課',              ja:'第2課',                 vi:'Bài hai.',                    en:'Lesson two.',          grp:'урок'},
+ {p:'Уро́к три.',       zh:'第三課',              ja:'第3課',                 vi:'Bài ba.',                     en:'Lesson three.',        grp:'урок'},
+ {p:'До́брый день!',    zh:'日安！',              ja:'こんにちは！',           vi:'Xin chào! (chào buổi chiều)',  en:'Good afternoon!',      grp:'greet'},
+ {p:'Приве́т!',         zh:'嗨！',                ja:'やあ！',                 vi:'Chào!',                       en:'Hi!',                  grp:'greet'},
+ {p:'Приве́тик!',       zh:'嗨～！',              ja:'やっほー！',             vi:'Chào nè!',                    en:'Hi there!',            grp:'greet'},
+ {p:'Как дела́?',       zh:'你好嗎？（事情怎麼樣？）', ja:'元気？（調子はどう？）', vi:'Bạn khỏe không? (Mọi việc thế nào?)', en:'How are you?', grp:'q'},
+ {p:'Как пого́да?',     zh:'天氣怎麼樣？',         ja:'天気はどう？',           vi:'Thời tiết thế nào?',          en:'How is the weather?',  grp:'q'},
+ {p:'Хорошо́!',         zh:'（很）好！',           ja:'いいよ！／元気！',       vi:'Tốt! / Khỏe!',                en:'Good! / Fine!',        grp:'adv'},
+ {p:'Норма́льно.',      zh:'還好。',              ja:'まあまあ。',             vi:'Bình thường.',                en:'OK.',                  grp:'adv'},
+ {p:'Пло́хо.',          zh:'不好。',              ja:'よくない。',             vi:'Không tốt.',                  en:'Bad.',                 grp:'adv'},
+ {p:'Как обы́чно.',     zh:'跟平常一樣。',         ja:'いつもどおり。',         vi:'Như thường lệ.',              en:'As usual.',            grp:'adv'},
+ {p:'Хоро́шая!',        zh:'（天氣）很好！',       ja:'（天気は）いいよ！',     vi:'(Thời tiết) đẹp!',            en:'Nice! (weather)',      grp:'adj'},
+ {p:'Норма́льная.',     zh:'（天氣）還好。',       ja:'（天気は）まあまあ。',   vi:'(Thời tiết) bình thường.',    en:'OK. (weather)',        grp:'adj'},
+ {p:'Плоха́я.',         zh:'（天氣）不好。',       ja:'（天気は）悪い。',       vi:'(Thời tiết) xấu.',            en:'Bad. (weather)',       grp:'adj'},
+ {p:'Обы́чная.',        zh:'（天氣）正常。',       ja:'（天気は）いつもどおり。', vi:'(Thời tiết) như mọi khi.',  en:'Usual. (weather)',     grp:'adj'}
 ];
 
 /* сборка фраз: плитки-слова */
 const BUILD_PHRASES = [
- {parts:['Добрый','день','!'],                              say:'До́брый день!',                  zh:'日安！',                     en:'Good afternoon!'},
- {parts:['Привет','!','Как','дела','?'],                    say:'Приве́т! Как дела́?',            zh:'嗨！你好嗎？',               en:'Hi! How are you?'},
- {parts:['Как','дела','?','Как','обычно','.'],              say:'Как дела́? Как обы́чно.',         zh:'你好嗎？跟平常一樣。',        en:'How are you? As usual.'},
- {parts:['Как','погода','?','Хорошая','!'],                 say:'Как пого́да? Хоро́шая!',          zh:'天氣怎麼樣？很好！',          en:'How is the weather? Nice!'},
- {parts:['Приветик','!','Как','погода','?','Плохая','.'],   say:'Приве́тик! Как пого́да? Плоха́я.', zh:'嗨～！天氣怎麼樣？不好。',    en:'Hi! How is the weather? Bad.'},
- {parts:['Урок','один',',','урок','два',',','урок','три'],  say:'Уро́к оди́н, уро́к два, уро́к три.', zh:'第一課、第二課、第三課',    en:'Lesson one, lesson two, lesson three'}
+ {parts:['Добрый','день','!'],                              say:'До́брый день!',                  zh:'日安！',                  ja:'こんにちは！',                    vi:'Xin chào!',                               en:'Good afternoon!'},
+ {parts:['Привет','!','Как','дела','?'],                    say:'Приве́т! Как дела́?',            zh:'嗨！你好嗎？',            ja:'やあ！元気？',                    vi:'Chào! Bạn khỏe không?',                   en:'Hi! How are you?'},
+ {parts:['Как','дела','?','Как','обычно','.'],              say:'Как дела́? Как обы́чно.',         zh:'你好嗎？跟平常一樣。',     ja:'元気？いつもどおり。',            vi:'Bạn khỏe không? Như thường lệ.',          en:'How are you? As usual.'},
+ {parts:['Как','погода','?','Хорошая','!'],                 say:'Как пого́да? Хоро́шая!',          zh:'天氣怎麼樣？很好！',       ja:'天気はどう？いいよ！',            vi:'Thời tiết thế nào? Đẹp!',                 en:'How is the weather? Nice!'},
+ {parts:['Приветик','!','Как','погода','?','Плохая','.'],   say:'Приве́тик! Как пого́да? Плоха́я.', zh:'嗨～！天氣怎麼樣？不好。', ja:'やっほー！天気はどう？悪いよ。',  vi:'Chào nè! Thời tiết thế nào? Xấu.',        en:'Hi! How is the weather? Bad.'},
+ {parts:['Урок','один',',','урок','два',',','урок','три'],  say:'Уро́к оди́н, уро́к два, уро́к три.', zh:'第一課、第二課、第三課', ja:'第1課、第2課、第3課',           vi:'Bài một, bài hai, bài ba',                en:'Lesson one, lesson two, lesson three'}
 ];
 
 /* ---------- твёрдый / мягкий: задания ----------
@@ -575,51 +638,54 @@ const HS = [
 ];
 function hsReason(o){
   const c = o.s[o.i];
-  if(o.r==='ш') return T(`<b>${c}</b> — всегда твёрдый.`, `ш is always hard.`, `ш 永遠是硬音。`);
-  if(o.r==='ч') return T(`<b>${c}</b> — всегда мягкий.`, `ч is always soft.`, `ч 永遠是軟音。`);
-  if(o.r==='ь') return T(`<b>${c}</b> + <b>ь</b> → мягкий.`, `followed by ь → soft.`, `後面有 ь → 軟音。`);
-  if(o.r==='end') return T(`<b>${c}</b> в конце, без <b>ь</b> → твёрдый.`, `at the end, no ь → hard.`, `在字尾、沒有 ь → 硬音。`);
+  if(o.r==='ш') return T(`<b>${c}</b> — всегда твёрдый.`, `ш is always hard.`, `ш 永遠是硬音。`, `ш はいつも硬子音です。`, `ш luôn là phụ âm cứng.`);
+  if(o.r==='ч') return T(`<b>${c}</b> — всегда мягкий.`, `ч is always soft.`, `ч 永遠是軟音。`, `ч はいつも軟子音です。`, `ч luôn là phụ âm mềm.`);
+  if(o.r==='ь') return T(`<b>${c}</b> + <b>ь</b> → мягкий.`, `followed by ь → soft.`, `後面有 ь → 軟音。`, `後ろに ь → 軟子音。`, `có ь phía sau → mềm.`);
+  if(o.r==='end') return T(`<b>${c}</b> в конце, без <b>ь</b> → твёрдый.`, `at the end, no ь → hard.`, `在字尾、沒有 ь → 硬音。`, `語末で ь がない → 硬子音。`, `ở cuối, không có ь → cứng.`);
   return o.soft
-    ? T(`<b>${c}</b> + <b>${o.r}</b> → мягкий.`, `before ${o.r} → soft.`, `${o.r} 前面 → 軟音（有 ㄧ 的感覺）。`)
-    : T(`<b>${c}</b> + <b>${o.r}</b> → твёрдый.`, `before ${o.r} → hard.`, `${o.r} 前面 → 硬音。`);
+    ? T(`<b>${c}</b> + <b>${o.r}</b> → мягкий.`, `before ${o.r} → soft.`, `${o.r} 前面 → 軟音（有 ㄧ 的感覺）。`, `${o.r} の前 → 軟子音（「イ」の響きがつく）。`, `trước ${o.r} → mềm (có âm «i» nhẹ).`)
+    : T(`<b>${c}</b> + <b>${o.r}</b> → твёрдый.`, `before ${o.r} → hard.`, `${o.r} 前面 → 硬音。`, `${o.r} の前 → 硬子音。`, `trước ${o.r} → cứng.`);
 }
 
 /* ---------- род: существительные уроков 1 и 2 ---------- */
+/* why: [русский, English, 中文, 日本語, Tiếng Việt] */
+const CONS = ['согласный','consonant','子音結尾','子音で終わる','tận cùng bằng phụ âm'];
 const GENDER = [
  /* урок 2 */
- {w:'уро́к',    g:'m', zh:'課',   en:'lesson',  why:['согласный','consonant','子音結尾']},
- {w:'день',     g:'m', zh:'天',   en:'day',     why:['-ь: этот надо запомнить','-ь: memorise this one','-ь 結尾：要背起來']},
- {w:'приве́т',  g:'m', zh:'嗨',   en:'hi',      why:['согласный','consonant','子音結尾']},
- {w:'приве́тик',g:'m', zh:'嗨～', en:'hi (cute)',why:['-ик — всегда м.р.','-ик is always masculine','-ик 永遠是陽性']},
- {w:'де́ло',    g:'n', zh:'事情', en:'affair',  why:['-о','-о','-о 結尾']},
- {w:'пого́да',  g:'f', zh:'天氣', en:'weather', why:['-а','-а','-а 結尾']},
+ {w:'уро́к',    g:'m', zh:'課',   ja:'課',     vi:'bài học',  en:'lesson',  why:CONS},
+ {w:'день',     g:'m', zh:'天',   ja:'日',     vi:'ngày',     en:'day',     why:['-ь: этот надо запомнить','-ь: memorise this one','-ь 結尾：要背起來','-ь：この単語は覚えよう','-ь: từ này phải học thuộc']},
+ {w:'приве́т',  g:'m', zh:'嗨',   ja:'やあ',   vi:'chào',     en:'hi',      why:CONS},
+ {w:'приве́тик',g:'m', zh:'嗨～', ja:'やっほー', vi:'chào nè', en:'hi (cute)',why:['-ик — всегда м.р.','-ик is always masculine','-ик 永遠是陽性','-ик はいつも男性','-ик luôn là giống đực']},
+ {w:'де́ло',    g:'n', zh:'事情', ja:'こと',   vi:'việc',     en:'affair',  why:['-о','-о','-о 結尾','-о で終わる','tận cùng -о']},
+ {w:'пого́да',  g:'f', zh:'天氣', ja:'天気',   vi:'thời tiết',en:'weather', why:['-а','-а','-а 結尾','-а で終わる','tận cùng -а']},
  /* урок 1 */
- {w:'и́мя',     g:'n', zh:'名字', en:'name',    why:['-мя — средний род','-мя is neuter','-мя 結尾是中性']},
- {w:'А́нна',    g:'f', zh:'安娜', en:'Anna',    why:['-а, женщина','-а, a woman','-а，女生']},
- {w:'Мари́я',   g:'f', zh:'瑪麗亞',en:'Maria',  why:['-я, женщина','-я, a woman','-я，女生']},
- {w:'Ка́тя',    g:'f', zh:'卡佳', en:'Katya',   why:['-я, женщина','-я, a woman','-я，女生']},
- {w:'Я́на',     g:'f', zh:'亞娜', en:'Yana',    why:['-а, женщина','-а, a woman','-а，女生']},
- {w:'Зо́я',     g:'f', zh:'卓婭', en:'Zoya',    why:['-я, женщина','-я, a woman','-я，女生']},
- {w:'Анто́н',   g:'m', zh:'安東', en:'Anton',   why:['согласный','consonant','子音結尾']},
- {w:'Ива́н',    g:'m', zh:'伊凡', en:'Ivan',    why:['согласный','consonant','子音結尾']},
- {w:'Влади́мир',g:'m', zh:'弗拉基米爾',en:'Vladimir',why:['согласный','consonant','子音結尾']},
- {w:'Анато́льевич',g:'m',zh:'阿納托利耶維奇（父名）',en:'Anatolyevich (patronymic)',why:['согласный; отчество мужчины','consonant; a man’s patronymic','子音結尾；男性父名']},
- {w:'Во́ва',    g:'m', zh:'瓦瓦', en:'Vova',    why:['-а, но это мужчина!','-а, but it’s a man!','-а 結尾，但是男生！']},
- {w:'Ва́ня',    g:'m', zh:'萬尼亞',en:'Vanya',  why:['-я, но это мужчина!','-я, but it’s a man!','-я 結尾，但是男生！']},
- {w:'Ники́та',  g:'m', zh:'尼基塔',en:'Nikita', why:['-а, но это мужчина!','-а, but it’s a man!','-а 結尾，但是男生！']}
+ {w:'и́мя',     g:'n', zh:'名字', ja:'名前',   vi:'tên',      en:'name',    why:['-мя — средний род','-мя is neuter','-мя 結尾是中性','-мя で終わる語は中性','-мя là giống trung']},
+ {w:'А́нна',    g:'f', zh:'安娜', ja:'アンナ', vi:'Anna',     en:'Anna',    why:['-а, женщина','-а, a woman','-а，女生','-а、女性','-а, là nữ']},
+ {w:'Мари́я',   g:'f', zh:'瑪麗亞',ja:'マリヤ', vi:'Maria',   en:'Maria',   why:['-я, женщина','-я, a woman','-я，女生','-я、女性','-я, là nữ']},
+ {w:'Ка́тя',    g:'f', zh:'卡佳', ja:'カーチャ', vi:'Katya',  en:'Katya',   why:['-я, женщина','-я, a woman','-я，女生','-я、女性','-я, là nữ']},
+ {w:'Я́на',     g:'f', zh:'亞娜', ja:'ヤーナ', vi:'Yana',     en:'Yana',    why:['-а, женщина','-а, a woman','-а，女生','-а、女性','-а, là nữ']},
+ {w:'Зо́я',     g:'f', zh:'卓婭', ja:'ゾーヤ', vi:'Zoya',     en:'Zoya',    why:['-я, женщина','-я, a woman','-я，女生','-я、女性','-я, là nữ']},
+ {w:'Анто́н',   g:'m', zh:'安東', ja:'アントン', vi:'Anton',  en:'Anton',   why:CONS},
+ {w:'Ива́н',    g:'m', zh:'伊凡', ja:'イワン', vi:'Ivan',     en:'Ivan',    why:CONS},
+ {w:'Влади́мир',g:'m', zh:'弗拉基米爾',ja:'ウラジーミル',vi:'Vladimir',en:'Vladimir',why:CONS},
+ {w:'Анато́льевич',g:'m',zh:'阿納托利耶維奇（父名）',ja:'アナトーリエヴィチ（父称）',vi:'Anatolyevich (tên theo cha)',en:'Anatolyevich (patronymic)',
+    why:['согласный; отчество мужчины','consonant; a man’s patronymic','子音結尾；男性父名','子音で終わる・男性の父称','tận cùng phụ âm; tên theo cha của nam']},
+ {w:'Во́ва',    g:'m', zh:'瓦瓦', ja:'ヴォーヴァ', vi:'Vova', en:'Vova',    why:['-а, но это мужчина!','-а, but it’s a man!','-а 結尾，但是男生！','-а で終わるけど男性！','-а nhưng là nam!']},
+ {w:'Ва́ня',    g:'m', zh:'萬尼亞',ja:'ワーニャ', vi:'Vanya', en:'Vanya',   why:['-я, но это мужчина!','-я, but it’s a man!','-я 結尾，但是男生！','-я で終わるけど男性！','-я nhưng là nam!']},
+ {w:'Ники́та',  g:'m', zh:'尼基塔',ja:'ニキータ', vi:'Nikita', en:'Nikita', why:['-а, но это мужчина!','-а, but it’s a man!','-а 結尾，但是男生！','-а で終わるけど男性！','-а nhưng là nam!']}
 ];
 const G_LABEL = {
-  m:{ru:'мужской', en:'masculine', zh:'陽性'},
-  f:{ru:'женский', en:'feminine',  zh:'陰性'},
-  n:{ru:'средний', en:'neuter',    zh:'中性'}
+  m:{ru:'мужской', en:'masculine', zh:'陽性', ja:'男性', vi:'giống đực'},
+  f:{ru:'женский', en:'feminine',  zh:'陰性', ja:'女性', vi:'giống cái'},
+  n:{ru:'средний', en:'neuter',    zh:'中性', ja:'中性', vi:'giống trung'}
 };
 
 /* ---------- наречие или прилагательное ---------- */
 const ADV_ADJ = [
- {adv:'Хорошо́',     adj:'Хоро́шая',    zh:'（很）好', en:'good'},
- {adv:'Норма́льно',  adj:'Норма́льная', zh:'還好',     en:'OK'},
- {adv:'Пло́хо',      adj:'Плоха́я',     zh:'不好',     en:'bad'},
- {adv:'Как обы́чно', adj:'Обы́чная',    zh:'跟平常一樣', en:'as usual'}
+ {adv:'Хорошо́',     adj:'Хоро́шая',    zh:'（很）好',   ja:'いい',         vi:'tốt',           en:'good'},
+ {adv:'Норма́льно',  adj:'Норма́льная', zh:'還好',       ja:'まあまあ',     vi:'bình thường',   en:'OK'},
+ {adv:'Пло́хо',      adj:'Плоха́я',     zh:'不好',       ja:'よくない',     vi:'không tốt',     en:'bad'},
+ {adv:'Как обы́чно', adj:'Обы́чная',    zh:'跟平常一樣', ja:'いつもどおり', vi:'như thường lệ', en:'as usual'}
 ];
 
 /* ============================================================
@@ -648,7 +714,7 @@ function renderVoiceUI(){
   if(!sel) return;
   sel.innerHTML='';
   if(!ruVoices.length){
-    sel.innerHTML='<option>Русский голос не найден · No Russian voice · 找不到俄語語音</option>';
+    sel.innerHTML='<option>Русский голос не найден · No Russian voice · '+P('找不到俄語語音','ロシア語の音声がありません','Không có giọng tiếng Nga')+'</option>';
     warn.classList.add('show');
     document.getElementById('soundPanel').classList.add('open');
     return;
@@ -682,7 +748,7 @@ function mkUtt(text, rate){
   return u;
 }
 function speak(text, rate){
-  if(!('speechSynthesis' in window)){ alert('Озвучка не поддерживается · Speech not supported · 此瀏覽器不支援語音'); return; }
+  if(!('speechSynthesis' in window)){ alert('Озвучка не поддерживается · Speech not supported · '+P('此瀏覽器不支援語音','このブラウザは音声に対応していません','Trình duyệt này không hỗ trợ đọc')); return; }
   speechSynthesis.cancel(); stopRec();
   const my = ++speakToken;
   setTimeout(()=>{ if(my===speakToken) speechSynthesis.speak(mkUtt(text, rate)); }, 70);
@@ -811,8 +877,29 @@ const CFG = {
   /* true — отдельное письмо преподавателю (как в ДЗ 1).
      Если в шаблоне EmailJS настроен Bcc на ваш адрес — поставьте false:
      уйдёт одно письмо вместо двух, лимит 200/мес. расходуется вдвое медленнее. */
-  teacherCopy : true
+  teacherCopy : false,   /* Bcc на преподавателя настроен в шаблоне → одно письмо на студента */
+  lessonKey   : 'L2'     /* метка урока для защиты от повторной отправки */
 };
+
+/* ---------- список группы: 學號 → строка в таблице Excel ----------
+   Номера хранятся в виде хэшей, чтобы список 學號 не лежал в открытом виде на GitHub. */
+const ROSTER = {"22mbv5sj2yr": 4, "2fjefcf1eb0": 5, "12efzlhqafv": 6, "r178psensj": 7, "13ezu2q9nra": 8, "6rnrf35hrc": 9, "12nhnabmpus": 10, "1hv0qyr5cr3": 11, "155ojo8i9vx": 12, "2ahs5vs7q0c": 13, "1k0ujqirlvo": 14, "1ujkxfyrvjr": 15, "73xj0xj4zj": 16, "bbcdk8pfrc": 17, "tifmgams2d": 18, "1aoj0gqn52a": 19, "3zmbdxwegx": 20, "1x11l9bdjms": 21, "243ciz6fmzw": 22, "2cf4fiqds8r": 23, "1ozy0oimb0o": 24, "26nw4f8huw5": 25, "26h280ya4o3": 26, "2gj4ngt8agr": 27, "mt932pygwp": 28};
+function cyrb53(str,seed=0){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0);}
+function normSid(v){ /* полноширинные цифры → обычные, всё лишнее убрать */
+  return String(v).replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/\D/g,''); }
+function rowOf(sid){ return ROSTER[cyrb53('cl242e|'+sid).toString(36)] || null; }
+
+/* ---------- защита от повторной отправки (отдельный ключ, не стирается при новой попытке) ---------- */
+function sentKey(sid){ return 'hw_sent_'+CFG.lessonKey+'_'+sid; }
+function wasSent(sid){ try{ return !!localStorage.getItem(sentKey(sid)); }catch(e){ return false; } }
+function markSent(sid){ try{ localStorage.setItem(sentKey(sid), new Date().toISOString()); }catch(e){} }
+let sending = false;
+/* номер попытки (на этом устройстве) — пишется в отчёт */
+function nextAttempt(sid){
+  const k='hw_att_'+CFG.lessonKey+'_'+sid; let n=1;
+  try{ n=(+localStorage.getItem(k)||0)+1; localStorage.setItem(k,String(n)); }catch(e){}
+  return n;
+}
 function cfgReady(){ return !/СЮДА_/.test(CFG.publicKey) && !/СЮДА_/.test(CFG.templateId); }
 if(window.emailjs && cfgReady()) emailjs.init({publicKey: CFG.publicKey});
 
@@ -821,17 +908,17 @@ const HS_L2_FROM = HS.findIndex(o=>o.s==='рок');   /* задания HS до 
 const RECORDED = new Set(Object.keys(SYL_AUDIO).map(k=>k.split('|')[1]));
 const PER = 2;                 /* 50 заданий × 2 балла = 100 */
 
-/* разделы: [код, русский, English, 中文, кол-во] */
+/* разделы: [код, русский, English, 中文, кол-во, 日本語, Tiếng Việt] */
 const SECTIONS = [
- ['A','Слоги урока 1 на слух',   'Lesson 1 syllables by ear',   '聽第一課的音節',   6],
- ['B','Слоги урока 2 на слух',   'Lesson 2 syllables by ear',   '聽第二課的音節',   6],
- ['C','Слово на слух',           'Words by ear',                '聽單字',          6],
- ['D','Фраза на слух',           'Phrases by ear',              '聽句子',          5],
- ['E','Собери слово из слогов',  'Build words from syllables',  '用音節拼單字',     5],
- ['F','Собери фразу',            'Build phrases',               '拼句子',          4],
- ['G','Твёрдый или мягкий?',     'Hard or soft consonant?',     '硬子音還是軟子音？', 8],
- ['H','Какого рода?',            'Noun gender',                 '名詞的性',        6],
- ['I','Хорошо или хорошая?',     'Adverb or adjective?',        '副詞還是形容詞？',  4]
+ ['A','Слоги урока 1 на слух',   'Lesson 1 syllables by ear',   '聽第一課的音節',   6, '第1課の音節の聞き取り', 'Nghe âm tiết bài 1'],
+ ['B','Слоги урока 2 на слух',   'Lesson 2 syllables by ear',   '聽第二課的音節',   6, '第2課の音節の聞き取り', 'Nghe âm tiết bài 2'],
+ ['C','Слово на слух',           'Words by ear',                '聽單字',          6, '単語の聞き取り',       'Nghe từ'],
+ ['D','Фраза на слух',           'Phrases by ear',              '聽句子',          5, '文の聞き取り',         'Nghe câu'],
+ ['E','Собери слово из слогов',  'Build words from syllables',  '用音節拼單字',     5, '音節で単語を作る',     'Ghép từ bằng âm tiết'],
+ ['F','Собери фразу',            'Build phrases',               '拼句子',          4, '文を作る',             'Ghép câu'],
+ ['G','Твёрдый или мягкий?',     'Hard or soft consonant?',     '硬子音還是軟子音？', 8, '硬子音？軟子音？',   'Phụ âm cứng hay mềm?'],
+ ['H','Какого рода?',            'Noun gender',                 '名詞的性',        6, '名詞の性',             'Giống của danh từ'],
+ ['I','Хорошо или хорошая?',     'Adverb or adjective?',        '副詞還是形容詞？',  4, '副詞？形容詞？',       'Trạng từ hay tính từ?']
 ];
 const SEC = Object.fromEntries(SECTIONS.map(s=>[s[0],s]));
 
@@ -922,7 +1009,7 @@ function initForm(){
   fmail.addEventListener('input', ()=>{ touched = true; });
   fid.addEventListener('input', ()=>{
     if(touched) return;
-    const v = fid.value.trim();
+    const v = normSid(fid.value);
     fmail.value = v ? v + '@' + CFG.studentMailDomain : '';
   });
   const s = load();
@@ -932,21 +1019,30 @@ function initForm(){
   }else if(s && s.finished){
     /* работа закончена, но письмо, возможно, не ушло — показываем итог снова */
     document.getElementById('resumeRow').style.display='flex';
-    document.getElementById('resumeInfo').textContent = `(${s.student.zh} · итог · 成績)`;
+    document.getElementById('resumeInfo').innerHTML = `(${esc(s.student.zh)} · итог · ${L('成績','結果','kết quả')})`;
   }
 }
 function startHW(){
   const zh=document.getElementById('fZh').value.trim(), ru=document.getElementById('fRu').value.trim(),
-        sid=document.getElementById('fId').value.trim(), mail=document.getElementById('fMail').value.trim();
+        sid=normSid(document.getElementById('fId').value), mail=document.getElementById('fMail').value.trim();
   const err=document.getElementById('formErr');
-  if(!zh||!ru||!sid){ err.innerHTML='Заполни все поля · Please fill in all fields · 請填寫所有欄位'; return; }
-  if(!/^\S+@\S+\.\S+$/.test(mail)){ err.innerHTML='Проверь e-mail · Check your e-mail · 請檢查 e-mail'; return; }
+  if(!zh||!ru||!sid){ err.innerHTML='Заполни все поля · Please fill in all fields · '+L('請填寫所有欄位','すべて入力してください','Hãy điền đủ các ô'); return; }
+  if(!/^\S+@\S+\.\S+$/.test(mail)){ err.innerHTML='Проверь e-mail · Check your e-mail · '+L('請檢查 e-mail','メールアドレスを確認してください','Kiểm tra lại e-mail'); return; }
+  const row = rowOf(sid);
+  if(!row && !confirm('Номера '+sid+' нет в списке группы. Проверь 學號! Всё верно?\n'+
+       'Student ID '+sid+' is not on the class list. Is it correct?\n'+
+       P('學號 '+sid+' 不在名單上，請再確認。確定正確嗎？','学籍番号 '+sid+' は名簿にありません。正しいですか？','Mã số '+sid+' không có trong danh sách lớp. Em chắc chắn đúng chứ?'))) return;
+  const practice = wasSent(sid);
+  if(practice && !confirm('Ты уже отправил(а) это задание. Сейчас можно только потренироваться — результат НЕ будет отправлен.\n'+
+       'You have already submitted this homework. This will be practice only (not sent).\n'+
+       P('你已經交過這份作業了。現在只能練習，成績不會再寄出。','この宿題はもう送信済みです。これは練習で、結果は送信されません。','Em đã nộp bài này rồi. Lần này chỉ là luyện tập, kết quả sẽ không được gửi.'))) return;
   const old = load();
   if(old && old.idx>0 && !old.finished &&
-     !confirm('Начать заново? Сохранённый прогресс будет удалён.\nStart over? Saved progress will be lost.\n重新開始？已儲存的進度會被刪除。')) return;
+     !confirm('Начать заново? Сохранённый прогресс будет удалён.\nStart over? Saved progress will be lost.\n'+
+       P('重新開始？已儲存的進度會被刪除。','最初からやり直しますか？保存された進み具合は消えます。','Bắt đầu lại? Tiến độ đã lưu sẽ bị xóa.'))) return;
   err.textContent='';
   unlockAudio();
-  st = {student:{zh,ru,sid,mail}, rounds:genRounds(), answers:[], idx:0, t0:Date.now(), finished:false, sent:false};
+  st = {student:{zh,ru,sid,mail,row}, rounds:genRounds(), answers:[], idx:0, t0:Date.now(), finished:false, sent:false, practice, attempt:nextAttempt(sid)};
   save();
   show('scr-task'); renderTask();
 }
@@ -978,7 +1074,7 @@ function renderTask(){
   document.getElementById('topProg').textContent = `${st.idx+1} / ${n}`;
   const s = SEC[r.sec];
   const inSec = st.rounds.filter(x=>x.sec===r.sec), k = inSec.indexOf(r)+1;
-  document.getElementById('sechead').innerHTML = `${s[0]} · ${s[1]} (${k}/${inSec.length})<small>${s[2]} · ${s[3]}</small>`;
+  document.getElementById('sechead').innerHTML = `${s[0]} · ${s[1]} (${k}/${inSec.length})<small>${s[2]} · ${L(s[3],s[5],s[6])}</small>`;
   document.getElementById('qfb').textContent=''; document.getElementById('qfb').className='feedback';
   const ex=document.getElementById('qexp'); ex.className='explain'; ex.innerHTML='';
   document.getElementById('qnext').style.display='none';
@@ -989,37 +1085,37 @@ function renderTask(){
 
   let instr='', opts=null, fmt=v=>v;
   if(r.t==='syl'){
-    instr=T('Послушай и выбери слог.','Listen and choose the syllable.','聽發音，選出正確的音節。');
+    instr=T('Послушай и выбери слог.','Listen and choose the syllable.','聽發音，選出正確的音節。','音声を聞いて、正しい音節を選んでください。','Nghe và chọn âm tiết đúng.');
     opts=r.opts;
   }
   if(r.t==='word'){
-    instr=T('Послушай и выбери слово.','Listen and choose the word.','聽發音，選出正確的單字。');
+    instr=T('Послушай и выбери слово.','Listen and choose the word.','聽發音，選出正確的單字。','音声を聞いて、正しい単語を選んでください。','Nghe và chọn từ đúng.');
     const disp=Object.fromEntries(WORDS2.map(x=>[plain(x.w),acc(x.w)]));
     opts=r.opts; fmt=v=>disp[v]||v;
   }
   if(r.t==='phrase'){
-    instr=T('Послушай и выбери фразу.','Listen and choose the phrase.','聽句子，選出正確的寫法。');
+    instr=T('Послушай и выбери фразу.','Listen and choose the phrase.','聽句子，選出正確的寫法。','文を聞いて、正しいものを選んでください。','Nghe và chọn câu đúng.');
     const disp=Object.fromEntries(PHRASES2.map(x=>[plain(x.p),acc(x.p)]));
     opts=r.opts; fmt=v=>disp[v]; box.classList.add('wide');
   }
   if(r.t==='hs'){
     const o=HS[r.i];
-    instr=T(`Согласный <b>${o.s[o.i]}</b> — твёрдый или мягкий?`,`Is the consonant ${o.s[o.i]} hard or soft?`,`子音 ${o.s[o.i]} 是硬音還是軟音？`);
-    pb.innerHTML=`<div class="qprompt"><div class="nmq">${o.s.slice(0,o.i)}<span class="tgt">${o.s[o.i]}</span>${o.s.slice(o.i+1)}</div><div class="cap">из слова · from · 來自：${acc(o.w)}</div></div>`;
-    const L={'0':'твёрдый<span class="sm">硬 · hard</span>','1':'мягкий<span class="sm">軟 · soft</span>'};
-    opts=['0','1']; fmt=v=>L[v]; box.classList.add('lab');
+    instr=T(`Согласный <b>${o.s[o.i]}</b> — твёрдый или мягкий?`,`Is the consonant ${o.s[o.i]} hard or soft?`,`子音 ${o.s[o.i]} 是硬音還是軟音？`,`子音 ${o.s[o.i]} は硬子音？軟子音？`,`Phụ âm ${o.s[o.i]} là cứng hay mềm?`);
+    pb.innerHTML=`<div class="qprompt"><div class="nmq">${o.s.slice(0,o.i)}<span class="tgt">${o.s[o.i]}</span>${o.s.slice(o.i+1)}</div><div class="cap">из слова · from · ${L('來自：','単語：','từ:')} ${acc(o.w)}</div></div>`;
+    const HL={'0':`твёрдый<span class="sm">${L('硬','硬子音','cứng')} · hard</span>`,'1':`мягкий<span class="sm">${L('軟','軟子音','mềm')} · soft</span>`};
+    opts=['0','1']; fmt=v=>HL[v]; box.classList.add('lab');
   }
   if(r.t==='gender'){
     const o=GENDER[r.i];
-    instr=T('Какого рода это слово?','What gender is this noun?','這個名詞是什麼性？');
-    pb.innerHTML=`<div class="qprompt"><div class="nmq">${acc(o.w)}</div><div class="cap tr">${o.zh} · ${o.en}</div></div>`;
-    opts=['m','f','n']; fmt=g=>`${G_LABEL[g].ru}<span class="sm">${G_LABEL[g].zh} · ${G_LABEL[g].en}</span>`;
+    instr=T('Какого рода это слово?','What gender is this noun?','這個名詞是什麼性？','この名詞の性は何ですか？','Danh từ này thuộc giống gì?');
+    pb.innerHTML=`<div class="qprompt"><div class="nmq">${acc(o.w)}</div><div class="cap tr">${gl(o)}</div></div>`;
+    opts=['m','f','n']; fmt=g=>`${G_LABEL[g].ru}<span class="sm">${gl(G_LABEL[g])}</span>`;
     box.classList.add('lab','wide');
   }
   if(r.t==='adv'){
     const o=ADV_ADJ[r.i], q=r.q==='дела'?'Как дела́?':'Как пого́да?';
-    instr=T('Выбери правильный ответ.','Choose the correct answer.','選出正確的回答。');
-    pb.innerHTML=`<div class="qprompt"><div class="nmq">— ${acc(q)}</div><div class="cap tr">— ${o.zh} · ${o.en}</div></div>`;
+    instr=T('Выбери правильный ответ.','Choose the correct answer.','選出正確的回答。','正しい答えを選んでください。','Chọn câu trả lời đúng.');
+    pb.innerHTML=`<div class="qprompt"><div class="nmq">— ${acc(q)}</div><div class="cap tr">— ${gl(o)}</div></div>`;
     const disp={[plain(o.adv)]:acc(o.adv),[plain(o.adj)]:acc(o.adj)};
     opts=r.opts; fmt=v=>disp[v]; box.classList.add('lab');
   }
@@ -1028,12 +1124,12 @@ function renderTask(){
     document.getElementById('buildBox').style.display='block';
     if(r.t==='bword'){
       const o=WORDS2[r.i];
-      instr=T('Послушай и собери слово из слогов. Одна плитка лишняя!','Listen and build the word. One tile is extra!','聽發音，用音節拼出單字。有一個是多餘的！');
-      pb.innerHTML=`<div class="taskword"><b>${o.zh}</b> · ${o.en}</div>`;
+      instr=T('Послушай и собери слово из слогов. Одна плитка лишняя!','Listen and build the word. One tile is extra!','聽發音，用音節拼出單字。有一個是多餘的！','音声を聞いて、音節を並べて単語を作ってください。1枚は余分です！','Nghe và ghép từ bằng các âm tiết. Có một thẻ bị thừa!');
+      pb.innerHTML=`<div class="taskword"><b>${L(o.zh,o.ja,o.vi)}</b> · ${o.en}</div>`;
     }else{
       const o=BUILD_PHRASES[r.i];
-      instr=T('Послушай и собери фразу.','Listen and build the phrase.','聽句子，依照順序拼出來。');
-      pb.innerHTML=`<div class="taskword"><b>${o.zh}</b><br>${o.en}</div>`;
+      instr=T('Послушай и собери фразу.','Listen and build the phrase.','聽句子，依照順序拼出來。','文を聞いて、順番どおりに並べてください。','Nghe và ghép câu theo đúng thứ tự.');
+      pb.innerHTML=`<div class="taskword"><b>${L(o.zh,o.ja,o.vi)}</b><br>${o.en}</div>`;
     }
     renderBuild();
   }
@@ -1079,14 +1175,15 @@ function itemLabel(r){
   if(r.t==='adv') return `Как ${r.q}? → ${answerOf(r)}`;
 }
 function explainOf(r){
-  if(r.t==='word'){ const o=WORDS2[r.i]; return `<b>${acc(o.w)}</b><span class="en">${o.en}</span><span class="zh">${o.zh}</span>`; }
-  if(r.t==='phrase'){ const o=PHRASES2[r.i]; return `<b>${acc(o.p)}</b><span class="en">${o.en}</span><span class="zh">${o.zh}</span>`; }
+  if(r.t==='word'){ const o=WORDS2[r.i]; return `<b>${acc(o.w)}</b><span class="en">${o.en}</span>${L(o.zh,o.ja,o.vi)}`; }
+  if(r.t==='phrase'){ const o=PHRASES2[r.i]; return `<b>${acc(o.p)}</b><span class="en">${o.en}</span>${L(o.zh,o.ja,o.vi)}`; }
   if(r.t==='hs') return hsReason(HS[r.i]);
   if(r.t==='gender'){ const o=GENDER[r.i];
-    return T(`<b>${acc(o.w)}</b> — ${G_LABEL[o.g].ru} род: ${o.why[0]}.`, `${G_LABEL[o.g].en}: ${o.why[1]}.`, `${G_LABEL[o.g].zh}：${o.why[2]}。`); }
+    const G=G_LABEL[o.g];
+    return T(`<b>${acc(o.w)}</b> — ${G.ru} род: ${o.why[0]}.`, `${G.en}: ${o.why[1]}.`, `${G.zh}：${o.why[2]}。`, `${G.ja}：${o.why[3]}。`, `${G.vi}: ${o.why[4]}.`); }
   if(r.t==='adv') return r.q==='дела'
-    ? T('<b>Как дела?</b> → отвечаем наречием: хорошо́, норма́льно, пло́хо, как обы́чно.','How are you? → answer with an adverb.','「Как дела?」→ 用副詞回答。')
-    : T('<b>пого́да</b> — женский род → прилагательное на <b>-ая</b>.','погода is feminine → adjective in -ая.','「погода」是陰性 → 形容詞用 -ая。');
+    ? T('<b>Как дела?</b> → отвечаем наречием: хорошо́, норма́льно, пло́хо, как обы́чно.','How are you? → answer with an adverb.','「Как дела?」→ 用副詞回答。','「Как дела?」→ 副詞で答えます。','«Как дела?» → trả lời bằng trạng từ.')
+    : T('<b>пого́да</b> — женский род → прилагательное на <b>-ая</b>.','погода is feminine → adjective in -ая.','「погода」是陰性 → 形容詞用 -ая。','「погода」は女性名詞 → 形容詞は -ая。','«погода» là giống cái → tính từ tận cùng -ая.');
   return '';
 }
 function afterSay(r){
@@ -1100,10 +1197,10 @@ function record(r, given, ok){
   st.answers[st.idx] = {sec:r.sec, item:itemLabel(r), given:human(r,given), ok};
   save();
   const fb=document.getElementById('qfb');
-  if(ok){ fb.textContent='Правильно! · Correct! · 答對了! 👍'; fb.className='feedback ok'; }
+  if(ok){ fb.innerHTML='Правильно! · Correct! · '+L('答對了!','正解！','Đúng rồi!')+' 👍'; fb.className='feedback ok'; }
   else{
     const a=answerOf(r);
-    fb.textContent='Ошибка · Wrong · 答錯了 — правильно: '+human(r,a);
+    fb.innerHTML='Ошибка · Wrong · '+L('答錯了','不正解','Sai rồi')+' — правильно: '+esc(human(r,a));
     fb.className='feedback no';
   }
   const ex=explainOf(r);
@@ -1160,7 +1257,7 @@ function checkBuild(){
   const r=cur();
   if(picked.indexOf(null)>=0){
     const fb=document.getElementById('qfb');
-    fb.textContent='Заполни все места · Fill all the slots · 請把空格填滿'; fb.className='feedback no'; return;
+    fb.innerHTML='Заполни все места · Fill all the slots · '+L('請把空格填滿','すべての枠を埋めてください','Hãy điền hết các ô'); fb.className='feedback no'; return;
   }
   locked=true;
   document.getElementById('bcheck').disabled=true;
@@ -1173,7 +1270,7 @@ function checkBuild(){
 }
 
 function nextTask(){
-  if(!locked) return;
+  if(!locked || !st || st.finished) return;
   st.idx++; save();
   if(st.idx < st.rounds.length){ renderTask(); return; }
   st.finished=true; st.t1=Date.now(); save();
@@ -1196,26 +1293,84 @@ function showDone(){
   const {ans, ok, score, secs, mins} = stats();
   show('scr-done');
   document.getElementById('topProg').textContent='';
-  document.getElementById('dtitle').textContent =
-    score>=90?'Отлично! · Excellent! · 太棒了!' : score>=70?'Хорошо! · Good! · 很好!' : score>=50?'Неплохо · Not bad · 還可以' : 'Надо повторить · Review needed · 要再複習';
+  document.getElementById('dtitle').innerHTML =
+    score>=90 ? 'Отлично! · Excellent! · '+L('太棒了!','すばらしい！','Xuất sắc!') :
+    score>=70 ? 'Хорошо! · Good! · '+L('很好!','よくできました！','Tốt lắm!') :
+    score>=50 ? 'Неплохо · Not bad · '+L('還可以','まあまあ','Khá') :
+                'Надо повторить · Review needed · '+L('要再複習','復習しましょう','Cần ôn lại');
   document.getElementById('dscore').textContent = score+' / 100';
   document.getElementById('dmsg').textContent = `${st.student.ru} · ${st.student.zh} · ${st.student.sid} · ${ok} из ${ans.length} · ${mins} мин`;
   let rows='<table>';
-  SECTIONS.forEach(([k,ru,en,zh])=>{
+  SECTIONS.forEach(([k,ru,en,zh,n,ja,vi])=>{
     const s=secs[k];
-    rows+=`<tr><td>${k}. ${ru}<br><span style="color:var(--muted);font-size:.75rem">${zh} · ${en}</span></td><td>${s.ok} / ${s.n}</td><td><b>${s.ok*PER}</b></td></tr>`;
+    rows+=`<tr><td>${k}. ${ru}<br><span style="color:var(--muted);font-size:.75rem">${L(zh,ja,vi)} · ${en}</span></td><td>${s.ok} / ${s.n}</td><td><b>${s.ok*PER}</b></td></tr>`;
   });
-  rows+=`<tr class="tot"><td>Итого · Total · 總分</td><td>${ok} / ${ans.length}</td><td><b>${score}</b></td></tr></table>`;
+  rows+=`<tr class="tot"><td>Итого · Total · ${L('總分','合計','Tổng')}</td><td>${ok} / ${ans.length}</td><td><b>${score}</b></td></tr></table>`;
   document.getElementById('dbreak').innerHTML=rows;
   document.getElementById('dlist').innerHTML='<ol>'+ans.map(a=>
     `<li class="${a.ok?'y':'n'}">${esc(a.item)} — ответ: ${esc(a.given)} ${a.ok?'✓':'✗'}</li>`).join('')+'</ol>';
   window.REPORT = reportText();
   document.getElementById('mailtoLink').href = 'mailto:'+CFG.teacherEmail+'?subject='+
-    encodeURIComponent('ДЗ '+CFG.lesson+' — '+st.student.sid+' '+st.student.zh)+'&body='+encodeURIComponent(window.REPORT);
-  if(st.sent){
-    setStatus('✅ Результат уже отправлен на '+esc(st.student.mail)+' и преподавателю.<span class="zh">成績已寄給你和老師。</span>', true);
-    document.getElementById('resendBtn').style.display='none';
-  }else sendResults();
+    encodeURIComponent('Стр. '+(st.student.row||'?')+' · ДЗ '+CFG.lesson+' — '+st.student.sid+' '+st.student.zh)+'&body='+encodeURIComponent(window.REPORT);
+  /* письмо НЕ уходит автоматически: студент сам решает — отправить или пройти заново */
+  if(st.sent) showSent();
+  else if(st.practice || wasSent(st.student.sid)) showPractice();
+  else showDecision();
+}
+/* панели под результатом: 'decide' — выбор, 'again' — только «ещё раз», 'fail' — письмо не ушло */
+function setStatus(html, mode){
+  document.getElementById('sendStatus').innerHTML=html;
+  document.getElementById('decideBtns').style.display = mode==='decide'?'flex':'none';
+  document.getElementById('againBtns').style.display  = mode==='again' ?'flex':'none';
+  document.getElementById('sendBtns').style.display   = mode==='fail'  ?'flex':'none';
+}
+function showDecision(){
+  setStatus(T('Доволен(а) результатом? Тогда отправь его преподавателю — отправить можно <b>только один раз</b>. Хочешь больше баллов — пройди задание заново (этот результат не отправится).',
+              'Happy with your score? Send it to the teacher — you can send <b>only once</b>. Want a better score? Start again (this result will not be sent).',
+              '對分數滿意嗎？那就寄給老師——成績<b>只能寄一次</b>。想拿更高分，可以重新作答（這次的成績不會寄出）。',
+              'この点数でよければ、先生に送ってください（送信できるのは<b>1回だけ</b>）。もっと点数を上げたいなら、もう一度やり直せます（今回の結果は送られません）。',
+              'Em hài lòng với điểm này chưa? Nếu rồi thì gửi cho thầy — <b>chỉ được gửi một lần</b>. Muốn điểm cao hơn thì làm lại từ đầu (kết quả lần này sẽ không được gửi).'), 'decide');
+}
+function showSent(){
+  setStatus('✅ '+T('Результат отправлен на '+esc(st.student.mail)+' и преподавателю. Дальше можно тренироваться — результаты больше не отправляются.',
+              'Your result has been sent to you and the teacher. You can keep practising; results will not be sent again.',
+              '成績已寄給你和老師（如果沒看到，請檢查垃圾郵件）。之後還可以繼續練習，但成績不會再寄出。',
+              '結果をあなたと先生に送りました（届かない場合は迷惑メールフォルダを確認してください）。このあとも練習できますが、結果はもう送信されません。',
+              'Đã gửi kết quả cho em và thầy (nếu không thấy, hãy kiểm tra thư rác). Em vẫn có thể luyện tập tiếp, nhưng kết quả sẽ không được gửi nữa.'), 'again');
+}
+function showPractice(){
+  setStatus('🔁 '+T('Это тренировка: задание уже было отправлено раньше. Этот результат не отправляется.',
+              'Practice only: this homework was already sent. This result is not sent.',
+              '這是練習：作業之前已經寄出了，這次的成績不會寄出。',
+              'これは練習です。宿題はすでに送信済みなので、今回の結果は送られません。',
+              'Đây là luyện tập: bài đã được gửi trước đó, kết quả lần này không được gửi.'), 'again');
+}
+function confirmSend(){
+  const sc = stats().score;
+  if(!confirm('Отправить результат '+sc+'/100 преподавателю? Потом изменить будет нельзя.\n'+
+              'Send your result '+sc+'/100 to the teacher? You cannot change it later.\n'+
+              P('確定要把 '+sc+'/100 分寄給老師嗎？寄出後就不能再改。',
+                sc+'/100点を先生に送信しますか？送信後は変更できません。',
+                'Gửi kết quả '+sc+'/100 cho thầy? Sau khi gửi sẽ không thể thay đổi.'))) return;
+  sendResults();
+}
+/* новая попытка с теми же данными студента; неотправленный результат просто отбрасывается */
+function restartHW(){
+  if(!st) return;
+  const unsent = !st.sent && !st.practice && !wasSent(st.student.sid);
+  if(unsent){
+    const sc = stats().score;
+    if(!confirm('Пройти задание заново? Этот результат ('+sc+'/100) не будет отправлен.\n'+
+                'Start again? This result ('+sc+'/100) will not be sent.\n'+
+                P('重新作答？這次的成績（'+sc+'/100）不會寄出。',
+                  'やり直しますか？今回の結果（'+sc+'/100点）は送信されません。',
+                  'Làm lại từ đầu? Kết quả lần này ('+sc+'/100) sẽ không được gửi.'))) return;
+  }
+  const sid = st.student.sid;
+  st = {student:st.student, rounds:genRounds(), answers:[], idx:0, t0:Date.now(), finished:false, sent:false,
+        practice:wasSent(sid), attempt:nextAttempt(sid)};
+  save(); unlockAudio();
+  show('scr-task'); renderTask();
 }
 function reportText(){
   const {ans, ok, score, secs, mins} = stats();
@@ -1224,9 +1379,10 @@ function reportText(){
   L.push('中文姓名: '+st.student.zh);
   L.push('Русское имя: '+st.student.ru);
   L.push('學號: '+st.student.sid);
+  L.push('Строка таблицы: № '+(st.student.row||'? (нет в списке)'));
   L.push('E-mail: '+st.student.mail);
   L.push('');
-  L.push('БАЛЛ: '+score+' / 100   ('+ok+' из '+ans.length+' заданий, '+mins+' мин)');
+  L.push('БАЛЛ: '+score+' / 100   ('+ok+' из '+ans.length+' заданий, '+mins+' мин, попытка № '+(st.attempt||1)+')');
   L.push('');
   SECTIONS.forEach(([k,ru])=>L.push('  '+k+'. '+ru+': '+secs[k].ok+'/'+secs[k].n+' = '+(secs[k].ok*PER)));
   L.push('');
@@ -1240,7 +1396,9 @@ function baseParams(){
   const {ans, ok, score, secs, mins} = stats();
   return {
     lesson: CFG.lesson,
-    student_no: '',
+    student_no: String(st.student.row||'?'),
+    row: String(st.student.row||'?'),
+    attempt: String(st.attempt||1),
     name_zh: st.student.zh,
     name_ru: st.student.ru,
     student_id: st.student.sid,
@@ -1250,47 +1408,53 @@ function baseParams(){
     correct: ok+' / '+ans.length,
     minutes: String(mins),
     breakdown: SECTIONS.map(([k,ru])=>k+'. '+ru+': '+secs[k].ok+'/'+secs[k].n+' = '+(secs[k].ok*PER)).join('\n'),
-    details: ans.map((a,i)=>(i+1)+'. '+a.item+' — '+a.given+' '+(a.ok?'OK':'X')).join('\n'),
+    details: 'Строка таблицы: № '+(st.student.row||'?')+' · попытка № '+(st.attempt||1)+'\n\n'+ans.map((a,i)=>(i+1)+'. '+a.item+' — '+a.given+' '+(a.ok?'OK':'X')).join('\n'),
     sent_at: new Date().toLocaleString('ru-RU'),
     report: window.REPORT
   };
 }
-function setStatus(html, showBtns){
-  document.getElementById('sendStatus').innerHTML=html;
-  document.getElementById('sendBtns').style.display=showBtns?'flex':'none';
-}
 function sendResults(){
   if(!cfgReady()){
-    setStatus('Автоотправка не настроена: в файле не вписаны ключи EmailJS. Скопируй результат и пришли преподавателю.'+
-              '<span class="zh">自動寄送尚未設定，請複製成績寄給老師。</span>', true); return;
+    setStatus(T('Автоотправка не настроена. Скопируй результат и пришли преподавателю.','Auto-sending is not set up. Copy your result and send it to the teacher.',
+                '自動寄送尚未設定，請複製成績寄給老師。','自動送信が設定されていません。結果をコピーして先生に送ってください。','Chưa cài đặt gửi tự động. Hãy sao chép kết quả và gửi cho thầy.'), 'fail'); return;
   }
   if(!window.emailjs){
-    setStatus('Не загрузилась библиотека EmailJS (нет интернета или её блокирует браузер). Скопируй результат и пришли преподавателю.'+
-              '<span class="zh">寄信程式沒有載入（網路或瀏覽器阻擋），請複製成績寄給老師。</span>', true); return;
+    setStatus(T('Не загрузилась программа отправки (нет интернета или её блокирует браузер). Скопируй результат и пришли преподавателю.',
+                'The sending library did not load (no internet or blocked by the browser). Copy your result and send it to the teacher.',
+                '寄信程式沒有載入（網路或瀏覽器阻擋），請複製成績寄給老師。',
+                '送信プログラムが読み込めませんでした（ネット接続またはブラウザの制限）。結果をコピーして先生に送ってください。',
+                'Không tải được chương trình gửi thư (mất mạng hoặc trình duyệt chặn). Hãy sao chép kết quả và gửi cho thầy.'), 'fail'); return;
   }
+  if(sending || st.sent) return;
+  if(st.practice || wasSent(st.student.sid)){ showPractice(); return; }
+  sending = true;
   const p=baseParams();
-  setStatus('Отправляю результат… · Sending… · 正在寄出成績…', false);
+  setStatus('Отправляю… · Sending… · '+L('正在寄出成績…','送信中…','Đang gửi…'), 'none');
   let chain = emailjs.send(CFG.serviceId, CFG.templateId, Object.assign({}, p, {to_email:st.student.mail, to_name:st.student.ru}));
   if(CFG.teacherCopy)
     chain = chain.then(()=>emailjs.send(CFG.serviceId, CFG.templateId, Object.assign({}, p, {to_email:CFG.teacherEmail, to_name:'Преподаватель'})));
   chain.then(()=>{
-      st.sent=true; save();
-      setStatus('✅ Результат отправлен на '+esc(st.student.mail)+' и преподавателю.<span class="zh">成績已寄給你和老師。（如果沒看到，請檢查垃圾郵件。）</span>', true);
-      document.getElementById('resendBtn').style.display='none';
+      sending=false; st.sent=true; save(); markSent(st.student.sid);
+      showSent();
     })
     .catch(err=>{
-      setStatus('⚠️ Письмо не ушло ('+esc(err&&(err.text||err.message)||'ошибка сети')+'). Нажми «Отправить снова» или скопируй результат и пришли преподавателю.'+
-                '<span class="zh">寄送失敗，請按「重新寄出」，或複製成績自行寄給老師。</span>', true);
+      sending=false;
+      setStatus('⚠️ '+T('Письмо не ушло ('+esc(err&&(err.text||err.message)||'ошибка сети')+'). Нажми «Отправить снова» или скопируй результат и пришли преподавателю.',
+                  'The e-mail was not sent. Press “Resend”, or copy your result and send it to the teacher.',
+                  '寄送失敗，請按「重新寄出」，或複製成績自行寄給老師。',
+                  '送信できませんでした。「もう一度送る」を押すか、結果をコピーして先生に送ってください。',
+                  'Gửi không thành công. Hãy bấm «Gửi lại», hoặc sao chép kết quả và tự gửi cho thầy.'), 'fail');
     });
 }
 function copyReport(){
   const t=window.REPORT||'';
-  const done=()=>alert('Скопировано · Copied · 已複製');
+  const done=()=>alert('Скопировано · Copied · '+P('已複製','コピーしました','Đã sao chép'));
   if(navigator.clipboard) navigator.clipboard.writeText(t).then(done).catch(()=>prompt('Ctrl+C',t));
   else prompt('Ctrl+C',t);
 }
 
 /* ---------- init ---------- */
+initLang();
 initForm();
 </script>
 </body>
