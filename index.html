@@ -301,6 +301,21 @@ body.lg-zh .ja, body.lg-zh .vi, body.lg-ja .zh, body.lg-ja .vi, body.lg-vi .zh, 
 .lgsw button{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;
   font-size:.82rem;color:var(--ink);cursor:pointer;font-family:'Rubik','Noto Sans TC','Noto Sans JP',sans-serif}
 .lgsw button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* ---------- копирайт ---------- */
+.copy{text-align:center;font-size:.72rem;color:var(--muted);margin-top:30px;padding-top:12px;border-top:1px solid var(--line);line-height:1.6}
+/* ---------- сроки сдачи ---------- */
+.dlbox{background:#FFF4E0;border-left:4px solid var(--gold);border-radius:10px;padding:10px 12px;font-size:.85rem;line-height:1.55;margin-bottom:14px}
+.dlbox.late{background:#FBEAE8;border-left-color:var(--red)}
+.dlbox .en,.dlbox .zh,.dlbox .ja,.dlbox .vi{display:block;color:#55627A;margin-top:4px}
+.dlbox ul,.modal ul{margin:6px 0 0;padding-left:22px}
+.modal{position:fixed;inset:0;background:rgba(30,42,68,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal.show{display:flex}
+.modal .card{background:var(--card);border-radius:18px;max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:18px 16px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.modal h3{font-family:'Russo One','Noto Sans TC',sans-serif;font-weight:400;font-size:1.1rem;margin-bottom:10px;color:var(--red)}
+.modal .rules{font-size:.86rem;line-height:1.6}
+.modal .rules .blk{margin-bottom:10px}
+.modal .rules .blk.en{color:#55627A}
+.latefix{font-size:.9rem;color:var(--red);font-weight:700;margin-top:-6px;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -330,6 +345,8 @@ body.lg-zh .ja, body.lg-zh .vi, body.lg-ja .zh, body.lg-ja .vi, body.lg-vi .zh, 
         <span class="zh">50 題 · 100 分 · 約 40–60 分鐘</span><span class="ja">50問 · 100点 · 約40〜60分</span><span class="vi">50 câu · 100 điểm · khoảng 40–60 phút</span>
       </div>
     </div>
+
+    <div class="dlbox" id="dlBanner" style="display:none"></div>
 
     <div class="instr">
       Слушать можно сколько угодно раз. В каждом задании засчитывается <b>первый</b> ответ. Прогресс сохраняется: можно закрыть страницу и продолжить позже на этом же устройстве.
@@ -440,6 +457,7 @@ body.lg-zh .ja, body.lg-zh .vi, body.lg-ja .zh, body.lg-ja .vi, body.lg-vi .zh, 
     <div class="result">
       <h2 id="dtitle"></h2>
       <div class="score" id="dscore"></div>
+      <div class="latefix" id="dlate"></div>
       <p id="dmsg"></p>
       <div id="dbreak"></div>
     </div>
@@ -465,6 +483,20 @@ body.lg-zh .ja, body.lg-zh .vi, body.lg-ja .zh, body.lg-ja .vi, body.lg-vi .zh, 
     </div>
   </section>
 
+  <footer class="copy">© 2026–2046 耿華 · Все права защищены · All rights reserved ·
+    <span class="zh">版權所有</span><span class="ja">無断転載禁止</span><span class="vi">Bảo lưu mọi quyền</span></footer>
+
+</div>
+
+<!-- всплывающее окно со сроками сдачи (пн–вт) -->
+<div class="modal" id="dlModal" role="dialog" aria-modal="true">
+  <div class="card">
+    <h3>⏰ Сроки сдачи · Deadlines · <span class="zh">繳交期限</span><span class="ja">提出期限</span><span class="vi">Hạn nộp bài</span></h3>
+    <div class="rules" id="dlRules"></div>
+    <div class="row" style="margin-top:6px">
+      <button class="btn red" onclick="document.getElementById('dlModal').classList.remove('show')">Понятно · OK · <span class="zh">我知道了</span><span class="ja">わかりました</span><span class="vi">Đã hiểu</span></button>
+    </div>
+  </div>
 </div>
 
 
@@ -878,7 +910,16 @@ const CFG = {
      Если в шаблоне EmailJS настроен Bcc на ваш адрес — поставьте false:
      уйдёт одно письмо вместо двух, лимит 200/мес. расходуется вдвое медленнее. */
   teacherCopy : false,   /* Bcc на преподавателя настроен в шаблоне → одно письмо на студента */
-  lessonKey   : 'L2'     /* метка урока для защиты от повторной отправки */
+  lessonKey   : 'L2',    /* метка урока для защиты от повторной отправки */
+  /* СРЕДА ЗАНЯТИЯ, к которому сдаётся это ДЗ (дата по Тайваню, ГГГГ-ММ-ДД).
+     От неё всё считается само:
+       открытие задания      — предыдущая среда, 18:00
+       полный балл           — до вторника 22:00 (фактически 22:05)
+       −5 баллов             — до среды 10:00   (фактически 10:05)
+       −10 баллов            — до среды 14:00   (фактически 14:05)
+       позже                 — 0 баллов
+     Для ДЗ к следующему уроку поменяйте дату на следующую среду. */
+  classDate   : '2026-09-30'
 };
 
 /* ---------- список группы: 學號 → строка в таблице Excel ----------
@@ -897,6 +938,120 @@ function sentKey(sid){ return 'hw_sent_'+CFG.lessonKey+'_'+sid; }
 function wasSent(sid){ if(isTest(sid)) return false; try{ return !!localStorage.getItem(sentKey(sid)); }catch(e){ return false; } }
 function markSent(sid){ if(isTest(sid)) return; try{ localStorage.setItem(sentKey(sid), new Date().toISOString()); }catch(e){} }
 let sending = false;
+
+/* ============================================================
+   СРОКИ СДАЧИ — время Тайваня (UTC+8, без перехода на летнее время)
+   ============================================================ */
+const TWO = 8*3600e3;
+function twAt(dateStr, dayShift, h, m){
+  const [y,mo,d] = dateStr.split('-').map(Number);
+  return Date.UTC(y, mo-1, d+dayShift, h, m) - TWO;
+}
+const DL = {
+  open: twAt(CFG.classDate,-7,18,0),   /* задание открывается */
+  full: twAt(CFG.classDate,-1,22,5),   /* вт 22:00 (+5 мин запаса) */
+  p5:   twAt(CFG.classDate, 0,10,5),   /* ср 10:00 (+5 мин) */
+  p10:  twAt(CFG.classDate, 0,14,5)    /* ср 14:00 (+5 мин) */
+};
+/* время берём с сервера GitHub (заголовок Date), чтобы перевод часов на телефоне не помогал;
+   если сервер недоступен (например, файл открыт локально) — время устройства */
+let clockOff = 0, clockSrc = 'device';
+function syncClock(){
+  if(!/^https?:$/.test(location.protocol) || !window.fetch) return Promise.resolve();
+  const t0 = Date.now();
+  return fetch(location.href.split('#')[0], {method:'HEAD', cache:'no-store'})
+    .then(r=>{ const d = Date.parse(r.headers.get('Date')||''); if(!isNaN(d)){ clockOff = d - (t0+Date.now())/2; clockSrc='server'; } })
+    .catch(()=>{});
+}
+function nowMs(){ return Date.now() + clockOff; }
+/* lvl: 0 — вовремя, 1 — −5, 2 — −10, 3 — 0 баллов; для тестового 學號 — всегда вовремя */
+function lateLevel(t, sid){
+  if(sid && isTest(sid)) return 0;
+  if(t <= DL.full) return 0;
+  if(t <= DL.p5)   return 1;
+  if(t <= DL.p10)  return 2;
+  return 3;
+}
+const PEN = [0,5,10,null];
+function finalOf(raw, lvl){ return lvl===3 ? 0 : Math.max(0, raw - PEN[lvl]); }
+/* подписи дат (без запасных 5 минут) */
+const TW_D = (shift)=>{ const d=new Date(twAt(CFG.classDate,shift,12,0)+TWO); return {d:d.getUTCDate(), m:d.getUTCMonth()+1}; };
+const dTue=TW_D(-1), dWed=TW_D(0), dOpen=TW_D(-7);
+const pad2 = n => String(n).padStart(2,'0');
+const D = {
+  ru: (o,wd)=>`${wd} ${pad2(o.d)}.${pad2(o.m)}`,
+  en: (o,wd)=>`${wd} ${o.d}/${o.m}`,
+  zh: (o,wd)=>`${o.m}/${o.d}（${wd}）`,
+  ja: (o,wd)=>`${o.m}/${o.d}（${wd}）`,
+  vi: (o,wd)=>`${wd} ${o.d}/${o.m}`
+};
+const TUE = {ru:D.ru(dTue,'вт'), en:D.en(dTue,'Tue'), zh:D.zh(dTue,'二'), ja:D.ja(dTue,'火'), vi:D.vi(dTue,'thứ Ba')};
+const WED = {ru:D.ru(dWed,'ср'), en:D.en(dWed,'Wed'), zh:D.zh(dWed,'三'), ja:D.ja(dWed,'水'), vi:D.vi(dWed,'thứ Tư')};
+const OPN = {ru:D.ru(dOpen,'ср'), en:D.en(dOpen,'Wed'), zh:D.zh(dOpen,'三'), ja:D.ja(dOpen,'水'), vi:D.vi(dOpen,'thứ Tư')};
+function twClock(t){ return new Date(t+TWO).toISOString().slice(0,16).replace('T',' '); }
+
+/* полный текст правил — на всех языках */
+function rulesHTML(){
+  return `<div class="blk"><b>Время — тайваньское. Считается момент нажатия «Отправить».</b><ul>
+      <li>до <b>${TUE.ru}, 22:00</b> — полный балл;</li>
+      <li>до <b>${WED.ru}, 10:00</b> — минус 5 баллов;</li>
+      <li>до <b>${WED.ru}, 14:00</b> — минус 10 баллов;</li>
+      <li>позже — <b>0 баллов</b>.</li></ul></div>
+    <div class="blk en">Taiwan time; what counts is the moment you press “Send”.<ul>
+      <li>by <b>${TUE.en}, 22:00</b> — full score;</li>
+      <li>by <b>${WED.en}, 10:00</b> — minus 5 points;</li>
+      <li>by <b>${WED.en}, 14:00</b> — minus 10 points;</li>
+      <li>later — <b>0 points</b>.</li></ul></div>
+    <div class="blk zh">台灣時間，以按下「寄給老師」的時間為準。<ul>
+      <li><b>${TUE.zh} 22:00</b> 前——全部分數；</li>
+      <li><b>${WED.zh} 10:00</b> 前——扣 5 分；</li>
+      <li><b>${WED.zh} 14:00</b> 前——扣 10 分；</li>
+      <li>之後——<b>0 分</b>。</li></ul></div>
+    <div class="blk ja">台湾時間です。「先生に送る」を押した時刻で判定します。<ul>
+      <li><b>${TUE.ja} 22:00</b> まで —— 満点のまま；</li>
+      <li><b>${WED.ja} 10:00</b> まで —— 5点減点；</li>
+      <li><b>${WED.ja} 14:00</b> まで —— 10点減点；</li>
+      <li>それ以降 —— <b>0点</b>。</li></ul></div>
+    <div class="blk vi">Giờ Đài Loan; tính theo thời điểm em bấm «Gửi cho thầy».<ul>
+      <li>trước <b>22:00 ${TUE.vi}</b> — giữ nguyên điểm;</li>
+      <li>trước <b>10:00 ${WED.vi}</b> — trừ 5 điểm;</li>
+      <li>trước <b>14:00 ${WED.vi}</b> — trừ 10 điểm;</li>
+      <li>sau đó — <b>0 điểm</b>.</li></ul></div>`;
+}
+/* короткое сообщение о текущем штрафе */
+function lateHTML(lvl){
+  if(lvl===1) return T(`Срок (${TUE.ru}, 22:00) прошёл: при отправке до ${WED.ru}, 10:00 — <b>минус 5 баллов</b>.`,
+                       `The deadline (${TUE.en}, 22:00) has passed: sending before ${WED.en}, 10:00 — <b>minus 5 points</b>.`,
+                       `已超過期限（${TUE.zh} 22:00）：在 ${WED.zh} 10:00 前寄出——<b>扣 5 分</b>。`,
+                       `締切（${TUE.ja} 22:00）を過ぎました。${WED.ja} 10:00 までの送信は<b>5点減点</b>です。`,
+                       `Đã quá hạn (22:00 ${TUE.vi}): gửi trước 10:00 ${WED.vi} — <b>trừ 5 điểm</b>.`);
+  if(lvl===2) return T(`Срок прошёл: при отправке до ${WED.ru}, 14:00 — <b>минус 10 баллов</b>.`,
+                       `The deadline has passed: sending before ${WED.en}, 14:00 — <b>minus 10 points</b>.`,
+                       `已超過期限：在 ${WED.zh} 14:00 前寄出——<b>扣 10 分</b>。`,
+                       `締切を過ぎました。${WED.ja} 14:00 までの送信は<b>10点減点</b>です。`,
+                       `Đã quá hạn: gửi trước 14:00 ${WED.vi} — <b>trừ 10 điểm</b>.`);
+  if(lvl===3) return T(`Срок сдачи закончился (${WED.ru}, 14:00): задание оценивается в <b>0 баллов</b>. Тренироваться можно.`,
+                       `The submission period is over (${WED.en}, 14:00): the homework is graded <b>0 points</b>. You can still practise.`,
+                       `繳交時間已結束（${WED.zh} 14:00）：作業以 <b>0 分</b>計算。仍然可以練習。`,
+                       `提出期間は終了しました（${WED.ja} 14:00）。宿題は<b>0点</b>になります。練習はできます。`,
+                       `Đã hết hạn nộp (14:00 ${WED.vi}): bài được tính <b>0 điểm</b>. Em vẫn có thể luyện tập.`);
+  return '';
+}
+function notOpenHTML(){
+  return T(`Это задание откроется <b>${OPN.ru}, в 18:00</b>.`, `This homework opens on <b>${OPN.en} at 18:00</b>.`,
+           `這份作業在 <b>${OPN.zh} 18:00</b> 開放。`, `この宿題は<b>${OPN.ja} 18:00</b>に公開されます。`,
+           `Bài tập này mở lúc <b>18:00 ${OPN.vi}</b>.`);
+}
+/* стартовый экран: баннер и всплывающее окно (пн–вт) */
+function refreshDeadlineUI(){
+  const t = nowMs(), lvl = lateLevel(t), b = document.getElementById('dlBanner');
+  if(t < DL.open){ b.className='dlbox'; b.innerHTML='🔒 '+notOpenHTML(); b.style.display='block'; }
+  else if(lvl>0){ b.className='dlbox late'; b.innerHTML='⏰ '+lateHTML(lvl); b.style.display='block'; }
+  else { b.style.display='none'; }
+  document.getElementById('dlRules').innerHTML = rulesHTML();
+  const wd = new Date(t+TWO).getUTCDay();             /* 1 — пн, 2 — вт (по Тайваню) */
+  if((wd===1 || wd===2) && t >= DL.open && t <= DL.full) document.getElementById('dlModal').classList.add('show');
+}
 /* номер попытки (на этом устройстве) — пишется в отчёт */
 function nextAttempt(sid){
   const k='hw_att_'+CFG.lessonKey+'_'+sid; let n=1;
@@ -1031,6 +1186,7 @@ function startHW(){
   const err=document.getElementById('formErr');
   if(!zh||!ru||!sid){ err.innerHTML='Заполни все поля · Please fill in all fields · '+L('請填寫所有欄位','すべて入力してください','Hãy điền đủ các ô'); return; }
   if(!/^\S+@\S+\.\S+$/.test(mail)){ err.innerHTML='Проверь e-mail · Check your e-mail · '+L('請檢查 e-mail','メールアドレスを確認してください','Kiểm tra lại e-mail'); return; }
+  if(!isTest(sid) && nowMs() < DL.open){ err.innerHTML='🔒 '+notOpenHTML(); return; }
   const row = rowOf(sid);
   if(!row && !confirm('Номера '+sid+' нет в списке группы. Проверь 學號! Всё верно?\n'+
        'Student ID '+sid+' is not on the class list. Is it correct?\n'+
@@ -1302,6 +1458,7 @@ function showDone(){
     score>=50 ? 'Неплохо · Not bad · '+L('還可以','まあまあ','Khá') :
                 'Надо повторить · Review needed · '+L('要再複習','復習しましょう','Cần ôn lại');
   document.getElementById('dscore').textContent = score+' / 100';
+  showLateLine();
   document.getElementById('dmsg').textContent = `${st.student.ru} · ${st.student.zh} · ${st.student.sid} · ${ok} из ${ans.length} · ${mins} мин`;
   let rows='<table>';
   SECTIONS.forEach(([k,ru,en,zh,n,ja,vi])=>{
@@ -1327,12 +1484,30 @@ function setStatus(html, mode){
   document.getElementById('againBtns').style.display  = mode==='again' ?'flex':'none';
   document.getElementById('sendBtns').style.display   = mode==='fail'  ?'flex':'none';
 }
+/* строка под баллом: сколько будет засчитано с учётом срока */
+function showLateLine(){
+  const el = document.getElementById('dlate'), raw = stats().score;
+  if(st.sent && st.lvl!==undefined){
+    el.innerHTML = st.lvl ? `Засчитано · Counted · ${L('實得分數','採点','Điểm được tính')}: ${st.final} / 100 (${st.lvl===3?'0':raw+' − '+PEN[st.lvl]})` : '';
+    return;
+  }
+  if(st.practice || wasSent(st.student.sid)){ el.innerHTML=''; return; }
+  const lvl = lateLevel(nowMs(), st.student.sid);
+  el.innerHTML = lvl ? `${lateHTML(lvl)}<br>→ ${finalOf(raw,lvl)} / 100` : '';
+}
 function showDecision(){
-  setStatus(T('Доволен(а) результатом? Тогда отправь его преподавателю — отправить можно <b>только один раз</b>. Хочешь больше баллов — пройди задание заново (этот результат не отправится).',
+  const lvl = lateLevel(nowMs(), st.student.sid);
+  const dl = lvl===0 && !isTest(st.student.sid)
+    ? '<br>⏰ '+T(`Срок: <b>${TUE.ru}, 22:00</b>.`, `Deadline: <b>${TUE.en}, 22:00</b>.`, `期限：<b>${TUE.zh} 22:00</b>。`, `締切：<b>${TUE.ja} 22:00</b>。`, `Hạn: <b>22:00 ${TUE.vi}</b>.`)
+    : '';
+  setStatus(dl ? dlDecision()+dl : dlDecision(), 'decide');
+}
+function dlDecision(){
+  return (T('Доволен(а) результатом? Тогда отправь его преподавателю — отправить можно <b>только один раз</b>. Хочешь больше баллов — пройди задание заново (этот результат не отправится).',
               'Happy with your score? Send it to the teacher — you can send <b>only once</b>. Want a better score? Start again (this result will not be sent).',
               '對分數滿意嗎？那就寄給老師——成績<b>只能寄一次</b>。想拿更高分，可以重新作答（這次的成績不會寄出）。',
               'この点数でよければ、先生に送ってください（送信できるのは<b>1回だけ</b>）。もっと点数を上げたいなら、もう一度やり直せます（今回の結果は送られません）。',
-              'Em hài lòng với điểm này chưa? Nếu rồi thì gửi cho thầy — <b>chỉ được gửi một lần</b>. Muốn điểm cao hơn thì làm lại từ đầu (kết quả lần này sẽ không được gửi).'), 'decide');
+              'Em hài lòng với điểm này chưa? Nếu rồi thì gửi cho thầy — <b>chỉ được gửi một lần</b>. Muốn điểm cao hơn thì làm lại từ đầu (kết quả lần này sẽ không được gửi).'));
 }
 function showSent(){
   if(isTest(st.student.sid)){
@@ -1352,9 +1527,16 @@ function showPractice(){
               'これは練習です。宿題はすでに送信済みなので、今回の結果は送られません。',
               'Đây là luyện tập: bài đã được gửi trước đó, kết quả lần này không được gửi.'), 'again');
 }
-function confirmSend(){
-  const sc = stats().score;
-  if(!confirm('Отправить результат '+sc+'/100 преподавателю? Потом изменить будет нельзя.\n'+
+async function confirmSend(){
+  await syncClock();
+  const raw = stats().score, lvl = lateLevel(nowMs(), st.student.sid), sc = finalOf(raw, lvl);
+  showLateLine();
+  const late = !lvl ? '' :
+    (lvl===3 ? 'Срок сдачи закончился — будет засчитано 0 баллов.\nThe deadline is over — 0 points will be counted.\n'+
+               P('繳交時間已結束，以 0 分計算。','提出期限が過ぎたため、0点になります。','Đã hết hạn nộp, sẽ tính 0 điểm.')
+             : 'Опоздание: −'+PEN[lvl]+' баллов ('+raw+' → '+sc+').\nLate: −'+PEN[lvl]+' points ('+raw+' → '+sc+').\n'+
+               P('遲交：扣 '+PEN[lvl]+' 分（'+raw+' → '+sc+'）。','遅れて提出：'+PEN[lvl]+'点減点（'+raw+' → '+sc+'）。','Nộp trễ: trừ '+PEN[lvl]+' điểm ('+raw+' → '+sc+').'))+'\n\n';
+  if(!confirm(late+'Отправить результат '+sc+'/100 преподавателю? Потом изменить будет нельзя.\n'+
               'Send your result '+sc+'/100 to the teacher? You cannot change it later.\n'+
               P('確定要把 '+sc+'/100 分寄給老師嗎？寄出後就不能再改。',
                 sc+'/100点を先生に送信しますか？送信後は変更できません。',
@@ -1389,19 +1571,26 @@ function reportText(){
   L.push('Строка таблицы: № '+(st.student.row||'? (нет в списке)'));
   L.push('E-mail: '+st.student.mail);
   L.push('');
-  L.push('БАЛЛ: '+score+' / 100   ('+ok+' из '+ans.length+' заданий, '+mins+' мин, попытка № '+(st.attempt||1)+')');
+  const lvl = st.lvl||0, fin = st.final!==undefined ? st.final : score;
+  L.push('ИТОГОВЫЙ БАЛЛ: '+fin+' / 100'+(lvl ? '   (набрано '+score+', '+LATE_RU[lvl]+')' : ''));
+  L.push('('+ok+' из '+ans.length+' заданий, '+mins+' мин, попытка № '+(st.attempt||1)+')');
   L.push('');
   SECTIONS.forEach(([k,ru])=>L.push('  '+k+'. '+ru+': '+secs[k].ok+'/'+secs[k].n+' = '+(secs[k].ok*PER)));
   L.push('');
   L.push('Ответы:');
   ans.forEach((a,i)=>L.push('  '+(i+1)+'. '+a.item+' — '+a.given+' '+(a.ok?'OK':'X')));
   L.push('');
-  L.push('Отправлено: '+new Date().toLocaleString('ru-RU'));
+  L.push('Отправлено: '+twClock(st.sentAt||nowMs())+' (Тайвань)'+(clockSrc==='server'?'':' — по часам устройства'));
   return L.join('\n');
 }
+const LATE_RU = ['вовремя','после вт 22:00: −5','после ср 10:00: −10','после ср 14:00: 0 баллов'];
 function baseParams(){
   const {ans, ok, score, secs, mins} = stats();
+  const lvl = st.lvl||0, fin = st.final!==undefined ? st.final : score;
   return {
+    raw_score: String(score),
+    penalty: lvl===3 ? String(score) : String(PEN[lvl]),
+    late: LATE_RU[lvl],
     lesson: CFG.lesson,
     student_no: String(st.student.row||'?'),
     row: String(st.student.row||'?'),
@@ -1410,13 +1599,13 @@ function baseParams(){
     name_ru: st.student.ru,
     student_id: st.student.sid,
     student_email: st.student.mail,
-    score: String(score),
+    score: String(fin),           /* итоговый балл — с учётом опоздания (он же в теме письма) */
     max_score: '100',
     correct: ok+' / '+ans.length,
     minutes: String(mins),
-    breakdown: SECTIONS.map(([k,ru])=>k+'. '+ru+': '+secs[k].ok+'/'+secs[k].n+' = '+(secs[k].ok*PER)).join('\n'),
+    breakdown: (lvl ? 'Набрано '+score+', '+LATE_RU[lvl]+' → итог '+fin+'\n\n' : '')+SECTIONS.map(([k,ru])=>k+'. '+ru+': '+secs[k].ok+'/'+secs[k].n+' = '+(secs[k].ok*PER)).join('\n'),
     details: 'Строка таблицы: № '+(st.student.row||'?')+' · попытка № '+(st.attempt||1)+'\n\n'+ans.map((a,i)=>(i+1)+'. '+a.item+' — '+a.given+' '+(a.ok?'OK':'X')).join('\n'),
-    sent_at: new Date().toLocaleString('ru-RU'),
+    sent_at: twClock(st.sentAt||nowMs())+' (Тайвань)',
     report: window.REPORT
   };
 }
@@ -1435,6 +1624,12 @@ function sendResults(){
   if(sending || st.sent) return;
   if(st.practice || wasSent(st.student.sid)){ showPractice(); return; }
   sending = true;
+  st.sentAt = nowMs();
+  st.lvl = lateLevel(st.sentAt, st.student.sid);
+  st.final = finalOf(stats().score, st.lvl);
+  window.REPORT = reportText();
+  document.getElementById('mailtoLink').href = 'mailto:'+CFG.teacherEmail+'?subject='+
+    encodeURIComponent((st.student.row||'?')+' · '+st.final+'/100 · ДЗ '+CFG.lesson+' — '+st.student.zh+' '+st.student.sid)+'&body='+encodeURIComponent(window.REPORT);
   const p=baseParams();
   setStatus('Отправляю… · Sending… · '+L('正在寄出成績…','送信中…','Đang gửi…'), 'none');
   let chain = emailjs.send(CFG.serviceId, CFG.templateId, Object.assign({}, p, {to_email:st.student.mail, to_name:st.student.ru}));
@@ -1442,7 +1637,7 @@ function sendResults(){
     chain = chain.then(()=>emailjs.send(CFG.serviceId, CFG.templateId, Object.assign({}, p, {to_email:CFG.teacherEmail, to_name:'Преподаватель'})));
   chain.then(()=>{
       sending=false; st.sent=true; save(); markSent(st.student.sid);
-      showSent();
+      showSent(); showLateLine();
     })
     .catch(err=>{
       sending=false;
@@ -1463,6 +1658,8 @@ function copyReport(){
 /* ---------- init ---------- */
 initLang();
 initForm();
+refreshDeadlineUI();
+syncClock().then(refreshDeadlineUI);
 </script>
 </body>
 </html>
